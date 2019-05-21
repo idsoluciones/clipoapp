@@ -12,7 +12,7 @@ html {
   font-size: 16px;
   line-height: 1.6;
   color: var(--second-color);
-  background-color: var(--main-modal-color);
+  background-color: #FFFBFB;
 }
 
 *,
@@ -45,7 +45,7 @@ p {
 }
 
 ::selection {
-  background-color: var(--second-color);
+  background-color: #FFFBFB;
   color: var(--main-color);
 }
 

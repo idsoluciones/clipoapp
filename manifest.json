@@ -2,7 +2,7 @@
   "name": "App ESPIM",
   "short_name": "PWA ESPIM",
   "description": "Bienvenid@s a ",
-  "background_color": "#2B2B2B",
+  "background_color": "#FFFBFB",
   "theme_color": "#0ddb40",
   "orientation": "portrait",
   "display": "standalone",

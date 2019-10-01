@@ -126,7 +126,7 @@ body{
 }
 
 .slider li, ul{
-	width: 100%;
+	width: 80%;
 }
 
 .slider li{
@@ -160,7 +160,7 @@ body{
 }
 
 .slider .caption p{
-	margin-top: 10px;
+	margin-top: 80px;
 	font-size: 20px;
 }
 

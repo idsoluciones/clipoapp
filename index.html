@@ -47,30 +47,13 @@ s0.parentNode.insertBefore(s1,s0);
 <!--End of Tawk.to Script-->
 	
 	<!-- Comienzo script validar sistema operativo -->
-	<script>
-showMap=function(q)
- {
- var device = navigator.userAgent;
- var url = 'http://maps.google.com?daddr='+q;
- if (device.match(/Iphone/i) || device.match(/iPhone|iPad|iPod/i))
- {
- // iOs
- url='http://maps.apple.com/maps?saddr=Current%20Location&daddr='+q;
- }
- else if(device.match(/Android/i))
- {
+	<script> showMap=function(q) { var device = navigator.userAgent; var url = 'http://maps.google.com?daddr='+q; if (device.match(/Iphone/i) || device.match(/iPhone|iPad|iPod/i))
+ { // iOs
+ url='http://maps.apple.com/maps?saddr=Current%20Location&daddr='+q; } else if(device.match(/Android/i)) {
  // Android
- url='geo:0,0?q='+q;
- }
- else if(device.match(/Windows Phone/i))
- {
+ url='geo:0,0?q='+q; } else if(device.match(/Windows Phone/i)) {
  // windows phone
- url='maps:'+q;
- }
-
- window.location.href = url;
- }
-	</script>
+ url='maps:'+q; } window.location.href = url;}	</script>
 <body>
 <!--<audio src="./sound/bienvenida.mp3" autoplay="true"></audio>-->
 	  <body background="./img/fondo.jpg">

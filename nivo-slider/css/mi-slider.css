@@ -21,16 +21,16 @@
 
 .nivo-controlNav{
 	display: flex;
-	justify-content: center;
+	justify-content: left;
 }
 
 .theme-mi-slider .nivo-control{
 	display: block;
-	width: 18px;
-	height: 18px;
+	width: 0px;
+	height: 0px;
 	border-radius: 50%;
 	background: #545454;
-	margin: 3px;
+	margin: 0px;
 	text-indent: -9999px
 }
 
@@ -45,8 +45,8 @@
 /* Nivo direction ============*/
 .nivo-directionNav a{
 	display: block;
-	width: 30px;
-	height: 30px;
+	width: 10px;
+	height: 10px;
 }
 
 .nivo-directionNav .nivo-prevNav{

@@ -140,7 +140,7 @@
         }
         
         // Add Control nav
-        if(settings.controlNav){
+       /* if(settings.controlNav){
             vars.controlNavEl = $('<div class="nivo-controlNav"></div>');
             slider.after(vars.controlNavEl);
             for(var i = 0; i < kids.length; i++){
@@ -155,7 +155,7 @@
                     vars.controlNavEl.append('<a class="nivo-control" rel="'+ i +'">'+ (i + 1) +'</a>');
                 }
             }
-
+*/
             //Set initial active link
             $('a:eq('+ vars.currentSlide +')', vars.controlNavEl).addClass('active');
             

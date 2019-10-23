@@ -1,107 +1,44 @@
-/* Custom Properties */
-:root {
-  --main-color: #F9f7f7;
-  --main-modal-color: rgba(252, 252, 249, .5);
-  --second-color: #2B2B2B;
-  --second-modal-color: rgba(43, 43, 43, .5);
-}
-
-html {
-  box-sizing: border-box;
-  font-family: 'Raleway', sans-serif;
-  font-size: 16px;
-  line-height: 1.6;
-  color: var(--second-color);
-  background-color: #FFFBFB;
-}
-
-*,
-*:after,
-*:before {
-  box-sizing: inherit;
+* {
   padding: 0;
   margin: 0;
 }
-
-body {
-  margin: 2rem auto;
-  overflow-x: hidden;
-  max-width: 800px;
-}
-
-a {
-  font-weight: bold;
-  color: var(--second-color);
-  transition: all .3s ease-out;
-}
-
-a:hover {
-  color: var(--second-modal-color);
-}
-
 p {
-  padding: 1rem;
-  font-size: 1.25rem;
+  margin-bottom: 20px;
+}
+.wrapper {
+  width: 100%;
+  margin: auto;
+  overflow:hidden;
+}
+header {
+  background: ;
+  width: 100%;
+  height 10%;
+  position: fixed;
+  z-index: 30;
 }
 
-::selection {
-  background-color: #FFFBFB;
-  color: var(--main-color);
+nav {
+  float: left; /* Desplazamos el nav hacia la izquierda */
 }
-
-.Header {
-  display: flex;
-  flex-direction: column;
-  text-align: center;
+nav ul {
+  list-style: none;
+  overflow: hidden; /* Limpiamos errores de float */
 }
-
-.Header h1 { word-wrap: break-word; }
-
-
-
-.Header nav {
-  padding: 2rem 0;
-  display: flex;
-  justify-content: space-evenly;
-  font-size: 3rem;
+nav ul li {
+  float: left;
+  font-family: Arial, sans-serif;
+  font-size: 16px;
 }
-
-.Main {
-  position: relative;
-  margin: 0 auto;
-  padding-bottom: 56.25%; /* 16:9 */
-}
-
-.Main iframe {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-  }
-
-.contenedor{
-    position: relative;
-    display: inline-block;
-    text-align: center;
-}
- 
-.texto-encima{
-    position: absolute;
-    top: 10px;
-    left: 10px;
-}
-.centrado{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 14PX;
-
-}
-.visor_imagenes {
-  text-align: center;
+nav ul li a {
+  display: block; /* Convertimos los elementos a en elementos bloque para manipular el padding */
+  padding: 20px;
   color: #fff;
-  background-color: #1BB43B;
-  font-style: italic;
+  text-decoration: none;
+}
+nav ul li:hover {
+  background: #3ead47;
+}
+.contenido {
+  padding-top: 80px;
 }

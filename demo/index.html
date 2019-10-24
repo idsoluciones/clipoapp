@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>particles.js</title>
+  <meta name="description" content="particles.js is a lightweight JavaScript library for creating particles.">
+  <meta name="author" content="Vincent Garreau" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <link rel="stylesheet" media="screen" href="css/style.css">
+</head>
+<body id="particles-js>
+
+
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" /> 
+    <img src="https://idsoluciones.github.io/espim2/img/banner.jpg" alt="cargando imagen">
+	<div class="contenedor">
+  <img src="../img/contenedor.jpg" style='width:100%; height:35px'  />
+  
+  <div class="centrado" id="heading">TRANSCRIPCIONES</div>
+</div>
+<script defer src="https://use.fontawesome.com/releases/v5.5.0/js/all.js" integrity="sha384-GqVMZRt5Gn7tB9D9q7ONtcp4gtHIUEW/yG7h98J7IpE3kpi+srfFyyB/04OV6pG0" crossorigin="anonymous"></script>
+  
+
+
+<script defer src="https://use.fontawesome.com/releases/v5.5.0/js/all.js" integrity="sha384-GqVMZRt5Gn7tB9D9q7ONtcp4gtHIUEW/yG7h98J7IpE3kpi+srfFyyB/04OV6pG0" crossorigin="anonymous"></script>
+       
+  </header>
+
+  
+  <script src="./script.js"></script>
+  
+   <section id="header">
+        
+
+     
+        <div class="inner">
+      <h3><strong> </strong><br >
+	   
+          <h1><strong></strong></br >
+	        <h1><strong>_</strong></br></h1>
+		  <h1><strong>Horario de Atención</strong></br >
+		  <div id="heading2" >AL PÚBLICO</div><br>
+          </h3>
+          <h1>Lunes a viernes <br/>
+          06:00 a 12:00
+		   <br/>14:00 a 17:00</h1>
+		   <br>
+		   <h1>Sábados</h1>
+	<p>(Solo se entregan formulas)<br /></p>         
+				<h1> 08:00 a 12:00</h1>
+                     
+        </div>
+      </section>
+
+
+
+
+
+<!-- count particles -->
+<div class="count-particles">
+  <span class="js-count-particles">--</span> particles
+</div>
+
+<!-- particles.js container -->
+<div id="particles-js"></div>
+
+<!-- scripts -->
+<script src="./particles.js"></script>
+<script src="js/app.js"></script>
+
+<!-- stats.js -->
+<script src="js/lib/stats.js"></script>
+<script>
+  var count_particles, stats, update;
+  stats = new Stats;
+  stats.setMode(0);
+  stats.domElement.style.position = 'absolute';
+  stats.domElement.style.left = '0px';
+  stats.domElement.style.top = '0px';
+  document.body.appendChild(stats.domElement);
+  count_particles = document.querySelector('.js-count-particles');
+  update = function() {
+    stats.begin();
+    stats.end();
+    if (window.pJSDom[0].pJS.particles && window.pJSDom[0].pJS.particles.array) {
+      count_particles.innerText = window.pJSDom[0].pJS.particles.array.length;
+    }
+    requestAnimationFrame(update);
+  };
+  requestAnimationFrame(update);
+</script>
+
+</body>
+</html>

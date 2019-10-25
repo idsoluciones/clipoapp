@@ -103,6 +103,12 @@ p {
   font-style: italic;
 }
 
+.bannerazul {
+  text-align: center;
+  color: #fff;
+  background-color: #0053A0;
+  font-style: italic;
+}
 
 *{
 	margin: 0;

@@ -152,15 +152,28 @@ p {
   background-color: #1BB43B;
   font-style: italic;
 }
-/* estilos para colocar texto sobre imagen */
 
+
+/* estilos para colocar texto sobre imagen */
 .contenedor{
     position: relative;
     display: inline-block;
     text-align: center;
-	
+font-family: 'Arial Black', 'Arial Bold', Gadget, sans-serif;
 }
  
+
+ .contenedorazul {
+  width: 100%;
+  text-align: center;
+   position: relative;
+    display: inline-block;
+    text-align: center;
+font-family: 'Arial Black', 'Arial Bold', Gadget, sans-serif;
+  
+  
+}
+
 .texto-encima{
     position: absolute;
     top: 10px;

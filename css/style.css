@@ -198,3 +198,39 @@ font: 100% sans-serif;
  }
  
  
+  .btn_azul{
+    text-decoration: none;
+    padding: 10px;
+    width:100%;
+    font-weight: 600;
+    font-size: 14px;
+    color: #ffffff;
+    background-color: rgba(39, 109, 225, .7);
+    border-radius: 1px;
+    border: 1px solid #000109;
+  }
+  .btn_azul:hover{
+    color: #1883ba;
+    background-color: rgba(255, 255, 255, .5);
+    text-align: center;
+  color: #0053A0;
+  box-shadow: 0 0 20px #4f9;
+  }
+
+.btn_verde{
+    text-decoration: none;
+    padding: 10px;
+    width:100%;
+    font-weight: 600;
+    font-size: 14px;
+    color: #ffffff;
+    background-color: rgba(14, 164, 19, .5);
+    border-radius: 1px;
+    border: 1px solid #000109;
+  }
+  .btn_verde:hover{
+    color: #1883ba;
+    background-color: rgba(255, 255, 255, .5);
+    text-align: center;
+  color: #0053A0;
+  }

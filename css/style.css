@@ -206,7 +206,7 @@ font: 100% sans-serif;
     font-size: 14px;
     color: #ffffff;
     background-color: rgba(39, 109, 225, .7);
-    border-radius: 1px;
+    border-radius: 15px;
     border: 1px solid #000109;
   }
   .btn_azul:hover{
@@ -225,7 +225,7 @@ font: 100% sans-serif;
     font-size: 14px;
     color: #ffffff;
     background-color: rgba(14, 164, 19, .5);
-    border-radius: 1px;
+    border-radius: 15px;
     border: 1px solid #000109;
   }
   .btn_verde:hover{

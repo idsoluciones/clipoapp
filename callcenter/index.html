@@ -30,57 +30,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     
     <link rel="stylesheet" href="https://updog.co/welcome/main.css" />
-    <style>
-body {
-  background: #8B96A2;
-  font-family: arial, helvetica;
-  padding: 0 0 0 0px;
-  
-}
-
-.accordion {
-  width: 90%;
-  border-radius: 5px;
-  overflow: hidden;
-  margin: auto;
-}
-
-
-
-.accordion .item .heading {
-  height: 40px;
-  line-height: 40px;
-  font-size: 14px;
-  cursor: pointer;
-  color: #fff;
-  padding-left: 10px;
-  background: #0053A0 url('arrow.png') no-repeat;
-  background-position: right 10px top -95px;
-  border-bottom: 1px solid #3187DC;
-  box-sizing: border-box;
-}
-
-.accordion .item .heading:hover{
-    color: #1883ba;
-    background-color: rgba(0, 83, 160, .7);
-    text-align: center;
-  color: #0053A0;
-   border-radius: 1px;
-  box-shadow: 0 0 30px #4f9;
-  }
-
-.accordion .item.open .heading,
-.accordion .item:last-child .heading { border: 0; }
-
-.accordion .item.open .heading { background-position: right 20px top -5px; }
-
-.accordion .item .content {
-  display: none;
-  padding: 15px;
-  background: #fff;
-  font-size: 14px;
-}
-</style>
+   
   </head>
 
 <body>
@@ -200,80 +150,7 @@ body {
 	        </div>
 		</section>
   
-  <h1 align="center">Preguntas Frecuentes</h1>
-<div class="accordion">
-  <div class="item">
-    <div class="heading">1. Donde puedo asistir a un comparendo </div>
-    <div class="content"><b>Puede asistir a los siguientes lugares: </b><br>
-  Clinica Regional Valle de Aburrá el día Jueves a las 14:00 horas<br>Dispensario de Bello el día martes 09:00 am</div>
-  </div>
-  <div class="item">
-    <div class="heading">2. Puedo solicitar cita directamente con especialista</div>
-    <div class="content">No, debe ser remitido por un Medico General</div>
-  </div>
-  <div class="item">
-    <div class="heading">3. Cuanto tiempo tengo para reclamar la fórmula </div>
-    <div class="content">A partir de la fecha impresa tiene 72 horas para reclamar su fórmula
-    <br>
-    <img src="formula.png">
-  </div>
-  </div>
-  <div class="item">
-    <div class="heading">4. Que citas me generan comparendo</div>
-    <div class="content">No asistir a citas de medicina general y especialistas<br>
-            No Reclamar fórmulas de Transcripciones.<br>
-            No asistir a citas de Medicina Laboral.<br>
-            No asistir a citas de Fisioterapia</div>
-  </div>
-
-
-<div class="item">
-    <div class="heading">5. Donde se solicitan las citas de Planificacíon Familiar</div>
-    <div class="content">Las citas de Planificacíon Familiar se solicitan en el teléfono <a href="tel:0343396600">3396600</a> ext 6884.
-
-    </div>
-  </div>
-    <div class="item">
-    <div class="heading">6. Donde se solicitan las citas de Crecimiento y Desarrollo</div>
-    <div class="content">Las citas de Crecimiento y Desarrollo se solicitan en el teléfono <a href="tel:0343396600">3396600</a> ext 6883.
-    </div>
-  </div>
-
-</div>
-
-
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> 
-<script>
-$('.accordion .item .heading').click(function() {
-    
-  var a = $(this).closest('.item');
-  var b = $(a).hasClass('open');
-  var c = $(a).closest('.accordion').find('.open');
-    
-  if(b != true) {
-    $(c).find('.content').slideUp(400);
-    $(c).removeClass('open');
-  }
-
-  $(a).toggleClass('open');
-  $(a).find('.content').slideToggle(200);
-
-});
-</script>
-<script type="text/javascript">
-
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-36251023-1']);
-  _gaq.push(['_setDomainName', 'jqueryscript.net']);
-  _gaq.push(['_trackPageview']);
-
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
-
-</script>
+ 
 </body>
 
 </html>

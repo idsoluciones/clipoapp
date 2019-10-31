@@ -65,7 +65,7 @@ p.titulo{
   /* respuesta desplegable */
 div.info{
 	-webkit-transition: height 0.2s;
-	background-color: #f5f5f5;
+	background-color: #F3F3F3;
 	height:0px;
 	overflow: hidden;
 	text-align: left;

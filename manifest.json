@@ -5,8 +5,9 @@
   "background_color": "#FFFBFB",
   "theme_color": "#0053A0",
   "orientation": "portrait",
-  "display": "standalone",
-  "start_url": "./?utm_source=web_app_manifest",
+  "display": "fullscreen",
+  "start_url": "./index.html",
+ 
   "scope": "./",
   "lang": "es-MX",
   "icons": [

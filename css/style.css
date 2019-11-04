@@ -236,7 +236,7 @@ font: 100% sans-serif;
   color: #0053A0;
   }
 
-btn_verdebanner{
+.btn_verdebanner{
     text-decoration: none;
     padding: 8px;
     width:100%;

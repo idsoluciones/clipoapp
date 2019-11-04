@@ -235,3 +235,14 @@ font: 100% sans-serif;
     text-align: center;
   color: #0053A0;
   }
+
+btn_verdebanner{
+    text-decoration: none;
+    padding: 8px;
+    width:100%;
+    font-weight: 200;
+	font-weight: bold;
+    font-size: 12px;
+    color: #ffffff;
+    background-color: rgba(52, 120, 59);
+     }

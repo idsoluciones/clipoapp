@@ -3,7 +3,7 @@
   "short_name": "CLIPO App",
   "description": "Bienvenid@s a ",
   "background_color": "#FFFBFB",
-  "theme_color": "#0053A0",
+  "theme_color": "#0053a0",
   "orientation": "portrait",
   "display": "standalone",
   "start_url": "./?utm_source=web_app_manifest",

@@ -285,3 +285,25 @@ td {    padding: 8px;     background: #e8edff;     border-bottom: 1px solid #fff
     color: #669;    border-top: 1px solid transparent; }
 
 tr:hover td { background: #d0dafd; color: #339; }
+
+	 
+.btn_rojo{
+    text-decoration: none;
+    padding: 8px;
+    width:100%;
+    font-weight: 200;
+	font-weight: bold;
+    font-size: 12px;
+    color: #ffffff;
+    background-color: rgba(255, 87, 51, .8);
+    border-radius: 15px;
+    border: 1px solid #000109;
+  }
+  .btn_rojo:hover{
+    color: #1883ba;
+    background-color: rgba(255, 255, 255, .5);
+    text-align: center;
+  color: #0053A0;
+  }
+  
+  

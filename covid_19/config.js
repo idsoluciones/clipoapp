@@ -1,0 +1,1 @@
+IDRViewer.config = {"pagecount":5,"title":"","author":"LEONARDO ESPINAL","fileName":"COMUNICADO_FOLLETO_5_-_8.pdf.pdf","bounds":[[935,1210],[935,1210],[935,1210],[935,1210],[935,1210]],"bookmarks":[],"thumbnailType":"jpg","pageType":"html","pageLabels":[]};

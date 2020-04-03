@@ -1,428 +1,1122 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<html lang="en">
 <head>
+<!-- v1.7.0 -->
+<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <title></title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="assets/idrviewer.css">
+<script src="assets/idrviewer.js" type="text/javascript"></script>
+<script src="assets/idrviewer.querystring-navigation.js"></script>
+<script src="assets/idrviewer.fullscreen.js"></script>
+<script src="assets/idrviewer.search.js"></script>
+<script src="assets/idrviewer.annotations.js"></script>
+<script type="text/javascript">
+(function() {
+    "use strict";
+    var LanguageHelper = (function() {
+        var translationsList = {
+            "ja":{"control.sidebar": "サイドバー","control.theme-toggle": "テーマ切換","control.prev": "前のページ",
+                "control.next": "次のページ","control.select": "選択","control.move": "パン","control.zoom-out": "縮小",
+                "control.zoom-in": "拡大","control.actual-size": "実際のサイズ","control.fit-width": "幅に合わせる",
+                "control.fit-height": "高さに合わせる","control.fit-page": "ページに合わせる","control.auto": "自動",
+                "control.fullscreen": "フルスクリーン","control.thumbnails": "サムネイル","control.outlines": "ブックマーク",
+                "control.presentation": "プレゼンテーション","control.magazine": "マガジン","control.continuous": "スクロール",
+                "control.search": "検索","control.page": "ページ","search.search": "検索","search.match-case": " 大文字・小文字を区別",
+                "search.limit-results-1": " 結果を1ページ１つに制限する","search.limit-results-500": "最初の500件が表示されます。",
+                "search.results-count": " 件","search.unavailable": "検索できません","search.loading": "ローディング"},
+            "fr":{"control.sidebar": "Barre latérale","control.theme-toggle": "Basculer entre les thèmes","control.prev": "Page précédente",
+                "control.next": "Page suivante","control.select": "Sélectionner","control.move": "Déplacer","control.zoom-out": "Zoom arrière",
+                "control.zoom-in": "Zoom avant","control.actual-size": "Taille réelle","control.fit-width": "Pleine largeur",
+                "control.fit-height": "Pleine hauteur","control.fit-page": "Page entière","control.auto": "Automatique",
+                "control.fullscreen": "Plein écran","control.thumbnails": "Vignettes","control.outlines": "Signets",
+                "control.presentation": "Présentation","control.magazine": "Magazine","control.continuous": "En continu",
+                "control.search": "Recherche","control.page": "Page","search.search": "Rechercher","search.match-case": " Respecter la casse",
+                "search.limit-results-1": " Limiter les résultats à 1 par page","search.limit-results-500": "Limitée aux 500 premiers résultats",
+                "search.results-count": " résultats","search.unavailable": "Recherche non accessible","search.loading": "Chargement en cours"},
+            "de":{"control.sidebar": "Seitenleiste","control.theme-toggle": "Darstellung wechseln","control.prev": "Vorherige Seite",
+                "control.next": "Nächste Seite","control.select": "Auswählen","control.move": "Bewegen","control.zoom-out": "Zoom Out",
+                "control.zoom-in": "Zoom In","control.actual-size": "Tatsächliche Grösse","control.fit-width": "Breite füllend",
+                "control.fit-height": "Höhe füllend","control.fit-page": "Seite füllend","control.auto": "Automatisch",
+                "control.fullscreen": "Ganzer Bildschirm","control.thumbnails": "Mini-Ansichten","control.outlines": "Lesezeichen",
+                "control.presentation": "Präsentationsdarstellung","control.magazine": "Magazindarstellung",
+                "control.continuous": "Fortlaufende Darstellung","control.search": "Suchen","control.page": "Seite","search.search": "Suchen",
+                "search.match-case": "Gross-/Kleinschreibung beachten","search.limit-results-1": "Auf 1 Resultat pro Seite begrenzen",
+                "search.limit-results-500": "Auf die ersten 500 Resultate begrenzen.","search.results-count": " Resultat(e)",
+                "search.unavailable": "Suche nicht verfügbar.","search.loading": "Lade"},
+            "hi":{"control.sidebar": "साइडबार","control.theme-toggle": "विषय टॉगल","control.prev": "पिछला पृष्ठ",
+                "control.next": "अगला पृष्ठ","control.select": "चुनते हैं","control.move": "पान","control.zoom-out": "छोटा करें",
+                "control.zoom-in": "बड़ा करें","control.actual-size": "वास्तविक आकार","control.fit-width": "चौड़ाई पर फ़िट",
+                "control.fit-height": "ठीक ऊंचाई","control.fit-page": "फिट पेज","control.auto": "स्वचालित",
+                "control.fullscreen": "पूर्ण स्क्रीन","control.thumbnails": "थंबनेल","control.outlines": "बुकमार्क",
+                "control.presentation": "प्रदर्शन","control.magazine": "पत्रिका",
+                "control.continuous": "निरंतर","control.search": "खोज","control.page": "पृष्ठ","search.search": "खोज",
+                "search.match-case": "मिलान घटना","search.limit-results-1": "सीमा परिणाम 1 प्रति पृष्ठ",
+                "search.limit-results-500": "पहले 500 परिणामों तक सीमित है","search.results-count": " परिणाम",
+                "search.unavailable": "उपलब्ध नहीं खोजें।","search.loading": "लोड हो रहा है"}
+        };
 
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
- <br/>
+        var lang = (navigator.language || navigator.userLanguage).substr(0, 2);
+        var translations = translationsList[lang] ? translationsList[lang] : false;
+
+        return {
+            getTranslation: function(name) {
+                return translations ? translations[name] : null;
+            },
+
+            updateElements: function() {
+                if (translations) {
+                    document.documentElement.setAttribute("lang", lang);
+                    var i, element;
+                    var titleElements = document.querySelectorAll("[data-lang-title]");
+                    for (i = 0; i < titleElements.length; i++) {
+                        element = titleElements[i];
+                        if (translations[element.dataset.langTitle]) {
+                            element.title = translations[element.dataset.langTitle];
+                        }
+                    }
+                    var textElements = document.querySelectorAll("[data-lang-text]");
+                    for (i = 0; i < textElements.length; i++) {
+                        element = textElements[i];
+                        if (translations[element.dataset.langText]) {
+                            element.innerText = translations[element.dataset.langText];
+                        }
+                    }
+                }
+            }
+        };
+    })();
+
+    var Button = {},
+        pageLabels = [];
+
+    /**
+     * Shorthand helper function to getElementById
+     * @param id
+     * @returns {Element}
+     */
+    var d = function (id) {
+        return document.getElementById(id);
+    };
+
+    var ClassHelper = (function() {
+        return {
+            addClass: function(ele, name) {
+                var classes = ele.className.length !== 0 ? ele.className.split(" ") : [];
+                var index = classes.indexOf(name);
+                if (index === -1) {
+                    classes.push(name);
+                    ele.className = classes.join(" ");
+                }
+            },
+
+            removeClass: function(ele, name) {
+                var classes = ele.className.length !== 0 ? ele.className.split(" ") : [];
+                var index = classes.indexOf(name);
+                if (index !== -1) {
+                    classes.splice(index, 1);
+                }
+                ele.className = classes.join(" ");
+            },
+
+            toggleClass: function(ele, name) {
+                var classes = ele.className.length !== 0 ? ele.className.split(" ") : [];
+                var index = classes.indexOf(name);
+                var wasClassAdded;
+                if (index === -1) {
+                    classes.push(name);
+                    wasClassAdded = true;
+                } else {
+                    classes.splice(index, 1);
+                    wasClassAdded = false;
+                }
+                ele.className = classes.join(" ");
+                return wasClassAdded;
+            }
+        };
+    })();
+
+    /**
+     * Encapsulation of sidebar functionality
+     */
+    var Sidebar = (function () {
+
+        var Sidebar = {},
+            loadedThumbsArray = [],
+            thumbnailPositions = [],
+            lastScroll = 0,
+            sidebar,
+            thumbnailBar,
+            imageType,
+            scrollSidebar = true,
+            thumbnailPanel,
+            bookmarkPanel,
+            searchPanel,
+            isSearchLoaded,
+            searchInput,
+            thumbnailScrollPt = 0,
+            bookmarkScrollPt = 0,
+            searchScrollPt = 0,
+            curPg,
+            pgCount,
+            MAX_THUMBNAIL_WIDTH = 160,
+            MAX_THUMBNAIL_HEIGHT = 200;
+
+        /**
+         * Performs the setup for the sidebar
+         * @param initialPage Current page
+         * @param pageCount Page count
+         * @param bounds Page bounds array
+         * @param thumbnailType Image type used for thumbnails
+         * @param bookmarks Object containing any bookmarks
+         */
+        Sidebar.setup = function (initialPage, pageCount, bounds, thumbnailType, bookmarks) {
+
+            curPg = initialPage;
+            pgCount = pageCount;
+            Button.outlines = d('btnOutlines');
+            Button.thumbnails = d('btnThumbnails');
+            Button.search = d('btnSearch');
+            d('btnSideToggle').onclick = Sidebar.toggleSidebar;
+            Button.outlines.onclick = Sidebar.switchToBookmarks;
+            Button.thumbnails.onclick = Sidebar.switchToThumbnails;
+            Button.search.onclick = Sidebar.switchToSearch;
+
+            thumbnailBar = d('leftContent');
+            sidebar = d('left');
+            thumbnailPanel = d('thumbnailPanel');
+            bookmarkPanel = d('outlinePanel');
+            searchPanel = d('searchPanel');
+            searchInput = d('searchInput');
+            imageType = thumbnailType;
+
+            loadThumbnailFrames(bounds);
+            // Initialise loaded array
+            for (var i = 0; i < pgCount; i++) {
+                loadedThumbsArray[i] = false;
+            }
+
+            Sidebar.switchToThumbnails();
+
+            thumbnailBar.addEventListener("scroll", handleThumbnailBarScroll);
+
+            if (bookmarks.length > 0) {
+                Sidebar.setBookmarks(bookmarks);
+            }
+            bookmarkScrollPt = bookmarkPanel.scrollTop;
+            searchScrollPt = searchPanel.scrollTop;
+            thumbnailBar.scrollTop = thumbnailScrollPt;
+
+            searchInput.value = LanguageHelper.getTranslation("search.loading") || "Loading";
+            searchInput.disabled = "disabled";
+            searchInput.oninput = doSearch;
+            d('cbMatchCase').onclick = doSearch;
+            d('cbLimitResults').onclick = doSearch;
+
+            document.addEventListener('keydown', function(event) {
+                if (event.keyCode == 70 && (event.ctrlKey || event.metaKey)) {
+                    Sidebar.openSidebar();
+                    Sidebar.switchToSearch();
+                    event.preventDefault();
+                }
+            });
+        };
+
+        var doSearch = function() {
+            var resultDiv = document.getElementById('searchResults');
+            resultDiv.innerHTML = "";
+
+            var searchTerm = d('searchInput').value;
+            var matchCase = d('cbMatchCase').checked;
+            var limitOnePerPage = d('cbLimitResults').checked;
+
+            var results = IDRViewer.search(searchTerm, matchCase, limitOnePerPage);
+
+            d('searchResultsCount').innerHTML = String(results.length) + (LanguageHelper.getTranslation("search.results-count") || " results");
+
+            var docFrag = document.createDocumentFragment();
+            for (var i = 0; i < results.length && i < 500; i++) {
+                var pg = results[i].page;
+
+                var link = document.createElement("a");
+                link.href = "?page=" + pg;
+                link.innerHTML = results[i].snippet;
+                link.className = "result";
+                (function(page) {
+                    link.onclick = function() {
+                        IDRViewer.goToPage(page);
+                        return false;
+                    };
+                })(pg);
+
+                docFrag.appendChild(link);
+
+            }
+            if (results.length >= 500) {
+                var element = document.createElement("span");
+                element.innerHTML = LanguageHelper.getTranslation("search.limit-results-500") || "Limited to first 500 results.";
+                element.className = "result";
+                docFrag.appendChild(element);
+            }
+            resultDiv.appendChild(docFrag);
+        };
+
+        Sidebar.openSidebar = function() {
+            if (sidebar.className.indexOf("open") === -1) {
+                Sidebar.toggleSidebar();
+            }
+        };
+
+        /**
+         * Toggle the sidebar open and closed
+         */
+        Sidebar.toggleSidebar = function () {
+            if (ClassHelper.toggleClass(sidebar, "open")) {
+                loadVisibleThumbnails();
+            }
+        };
+
+        /**
+         * Display the thumbnail panel in the sidebar
+         */
+        Sidebar.switchToThumbnails = function () {
+            if (bookmarkPanel.className == "visible") {
+                bookmarkScrollPt = thumbnailBar.scrollTop;
+            }
+            if (searchPanel.className == "visible") {
+                searchScrollPt = thumbnailBar.scrollTop;
+            }
+
+            thumbnailPanel.className = "visible";
+            bookmarkPanel.className = "hidden";
+            searchPanel.className = "hidden";
+            if (sidebar.className.indexOf("open") !== -1) {
+                loadVisibleThumbnails();
+                updateThumbnailPanelToCurrentPage();
+            }
+            Button.thumbnails.className = 'disabled btn';
+            Button.outlines.className = 'btn';
+            Button.search.className = 'btn';
+        };
+
+        /**
+         * Display the bookmarks panel in the sidebar
+         */
+        Sidebar.switchToBookmarks = function () {
+            if (searchPanel.className == "visible") {
+                searchScrollPt = thumbnailBar.scrollTop;
+            }
+            if (thumbnailPanel.className == "visible") {
+                thumbnailScrollPt = thumbnailBar.scrollTop;
+            }
+
+            thumbnailPanel.className = "hidden";
+            bookmarkPanel.className = "visible";
+            searchPanel.className = "hidden";
+            Button.thumbnails.className = 'btn';
+            Button.outlines.className = 'disabled btn';
+            Button.search.className = 'btn';
+            thumbnailBar.scrollTop = bookmarkScrollPt;
+        };
+
+        Sidebar.switchToSearch = function() {
+            if (bookmarkPanel.className == "visible") {
+                bookmarkScrollPt = thumbnailBar.scrollTop;
+            }
+            if (thumbnailPanel.className == "visible") {
+                thumbnailScrollPt = thumbnailBar.scrollTop;
+            }
+
+            thumbnailPanel.className = "hidden";
+            bookmarkPanel.className = "hidden";
+            searchPanel.className = "visible";
+            Button.thumbnails.className = 'btn';
+            Button.outlines.className = 'btn';
+            Button.search.className = 'disabled btn';
+
+            var loadListener = function(loaded) {
+                if (loaded) {
+                    searchInput.value = "";
+                    searchInput.disabled = "";
+                    searchInput.focus();
+                } else {
+                    searchInput.value = LanguageHelper.getTranslation("search.unavailable") || "Search not available.";
+                }
+            };
+            var progressListener = function(percentageLoaded) {
+                searchInput.value = (LanguageHelper.getTranslation("search.loading") || "Loading") + " (" + percentageLoaded + "%)";
+            };
+            if (!isSearchLoaded) {
+                IDRViewer.loadSearch(loadListener, progressListener);
+            }
+            searchInput.focus();
+            thumbnailBar.scrollTop = searchScrollPt;
+        };
+
+        /**
+         * Load the frames for all the thumbnails
+         * @param bounds Page bound array
+         */
+        var loadThumbnailFrames = function (bounds) {
+            var heights = [];
+            // Calculate height for max width of 160px and max height of 200px
+            for (var i = 0; i < bounds.length; i++) {
+                var height = Math.floor(bounds[i][1] * (MAX_THUMBNAIL_WIDTH / bounds[i][0]));
+                heights[i] = (bounds[i][0] > bounds[i][1] || height <= MAX_THUMBNAIL_HEIGHT) ? height : MAX_THUMBNAIL_HEIGHT;
+            }
+
+            function makeThumbnailClickHandler(pg) {
+                return function() {
+                    scrollSidebar = false;
+                    IDRViewer.goToPage(pg);
+                    return false;
+                };
+            }
+
+            for (var page = 1; page <= bounds.length; page++) {
+                var ele = document.createElement("a");
+                ele.style.height = heights[page - 1] + "px";
+                ele.className = "thumbnail";
+                ele.href = "?page=" + page;
+                ele.id = "thumb" + page;
+                ele.onclick = makeThumbnailClickHandler(page);
+                ele.setAttribute('title', (LanguageHelper.getTranslation("control.page") || 'Page') + ' ' + page);
+                var margin = Math.floor((heights[page - 1] - 42) / 2);
+                ele.innerHTML = '<div class="spinner" style="margin-top: ' + margin + 'px;"></div>';
+                thumbnailPanel.appendChild(ele);
+            }
+
+            for (page = 1; page <= bounds.length; page++) {
+                thumbnailPositions[page - 1] = thumbnailPanel.children[page - 1].offsetTop;
+            }
+        };
+
+        var handleThumbnailBarScroll = function () {
+            var scrollTop = thumbnailBar.scrollTop;
+            lastScroll = scrollTop;
+            showVisibleSpinners();
+            setTimeout(function () {
+                loadVisibleThumbnails(scrollTop);
+            }, 500);
+        };
+
+        var showVisibleSpinners = function() {
+            var startY = thumbnailBar.scrollTop;
+            var endY = startY + thumbnailBar.clientHeight;
+            for (var index = 0; index < pgCount; index++) {
+                if (!loadedThumbsArray[index]) {
+                    if (thumbnailPositions[index] + MAX_THUMBNAIL_WIDTH > startY && thumbnailPositions[index] < endY) {
+                        ClassHelper.addClass(thumbnailPanel.children[index].firstChild, "spinning");
+                    } else {
+                        ClassHelper.removeClass(thumbnailPanel.children[index].firstChild, "spinning");
+                    }
+                }
+            }
+        };
+
+        var loadVisibleThumbnails = function (scrollTop) {
+            if (typeof scrollTop !== 'undefined' && scrollTop != lastScroll)
+                return;
+
+            // load thumbs in view
+            for (var thumbIndex = 0; thumbIndex < pgCount; thumbIndex++) {
+                if (!loadedThumbsArray[thumbIndex]) {
+                    var curThumb = thumbnailPanel.children[thumbIndex];
+                    // Bails out of the loop when the next thumbnail is below the viewable area
+                    if (curThumb.offsetTop > thumbnailBar.scrollTop + thumbnailBar.clientHeight) {
+                        break;
+                    }
+                    if (curThumb.offsetTop + curThumb.clientHeight > thumbnailBar.scrollTop) {
+                        curThumb.innerHTML = '<img src="thumbnails/' + (thumbIndex + 1) + '.' + imageType + '" />';
+                        loadedThumbsArray[thumbIndex] = true;
+                    }
+                }
+            }
+        };
+
+        /**
+         * Scrolls the thumbnail bar to a specific page and adds currentPageThumbnail class.
+         * @param page Page to scroll to
+         */
+        Sidebar.handlePageChange = function (page) {
+            curPg = page;
+            if (thumbnailPanel.className === "visible") {
+                updateThumbnailPanelToCurrentPage();
+            }
+            scrollSidebar = true;
+        };
+
+        var updateThumbnailPanelToCurrentPage = function() {
+            var curThumb = thumbnailPanel.children[curPg - 1];
+            if (curThumb.className !== "thumbnail currentPageThumbnail") {
+
+                for (var i = 0; i < pgCount; i++) {
+                    thumbnailPanel.children[i].className = "thumbnail";
+                }
+
+                curThumb.className = "thumbnail currentPageThumbnail";
+
+                if (scrollSidebar) {
+                    thumbnailBar.scrollTop = thumbnailBar.scrollTop + curThumb.getBoundingClientRect().top - d('leftContent').getBoundingClientRect().top;
+                }
+            }
+        };
+
+        Sidebar.setBookmarks = function (bookmarks) {
+            ClassHelper.addClass(sidebar, 'hasBookmarks');
+            addBookmark(bookmarkPanel, bookmarks);
+        };
+
+        var addBookmark = function (container, bookmarks) {
+            var outer = document.createElement('ul');
+
+            var makeBookmarkClickHandler = function(pg, zoom) {
+                return function() {
+                    IDRViewer.goToPage(parseInt(pg), zoom);
+                };
+            };
+            for (var i = 0; i < bookmarks.length; i++) {
+                var bookmark = bookmarks[i];
+                var li = document.createElement('li');
+                li.setAttribute('title', 'Page ' + bookmark.page);
+                li.innerHTML = bookmark.title;
+                li.onclick = makeBookmarkClickHandler(bookmark.page, bookmark.zoom);
+                outer.appendChild(li);
+                if (typeof(bookmark.children) != 'undefined') {
+                    addBookmark(outer, bookmark.children);
+                }
+            }
+            container.appendChild(outer);
+        };
+
+        return Sidebar;
+    })();
+
+    var populateGoBtn = function (initialPage, pgCount) {
+        Button.go.className = "";
+        Button.go.innerHTML = "";
+        for (var i = 1; i <= pgCount; i++) {
+            var opt = document.createElement('option');
+            opt.value = i;
+            opt.innerHTML = pageLabels.length ? pageLabels[i - 1] : String(i);
+            Button.go.appendChild(opt);
+        }
+        Button.go.selectedIndex = initialPage - 1;
+    };
+
+    var handleGoBtn = function () {
+        IDRViewer.goToPage(parseInt(Button.go.options[Button.go.selectedIndex].value));
+        this.blur();
+    };
+
+    var updateSelectionButtons = function (mode) {
+        switch (mode) {
+            case IDRViewer.SELECT_PAN:
+                Button.select.className = 'btn';
+                Button.move.className = 'disabled btn';
+                break;
+            case IDRViewer.SELECT_SELECT:
+                Button.select.className = 'disabled btn';
+                Button.move.className = 'btn';
+                break;
+        }
+    };
+
+    var handlePageChange = function (data) {
+        d('pgCount').innerHTML = getPageString(data.page, data.pagecount);
+        Sidebar.handlePageChange(data.page);
+        Button.go.selectedIndex = data.page - 1;
+
+        Button.prev.className = data.isFirstPage ? 'disabled btn' : 'btn';
+        Button.next.className = data.isLastPage ? 'disabled btn' : 'btn';
+    };
+
+    var handleZoomUpdate = function (data) {
+        Button.zoom.value = data.zoomType;
+        Button.zoom.options[0].innerHTML = Math.floor(data.zoomValue * 100) + "%";
+
+        Button.zoomOut.className = data.isMinZoom ? 'disabled btn' : 'btn';
+        Button.zoomIn.className = data.isMaxZoom ? 'disabled btn' : 'btn';
+    };
+
+    var handleSelectionChange = function (data) {
+        updateSelectionButtons(data.type);
+    };
+
+    var handleZoomBtn = function () {
+        var zoomType = Button.zoom.value;
+        if (zoomType != IDRViewer.ZOOM_SPECIFIC) {
+            IDRViewer.setZoom(zoomType);
+        }
+        this.blur();
+    };
+
+    var handleViewBtn = function () {
+        IDRViewer.setLayout(Button.View.value);
+        this.blur();
+    };
+
+    var setupLayoutSwitching = function (pgCount, layout, availableLayouts) {
+        if (availableLayouts.length > 1 && pgCount > 1) {
+            Button.View = document.createElement('select');
+            Button.View.id = 'viewBtn';
+
+            var temp = document.createElement('option');
+            temp.innerHTML = LanguageHelper.getTranslation("control.presentation") || "Presentation";
+            temp.value = IDRViewer.LAYOUT_PRESENTATION;
+            Button.View.appendChild(temp);
+
+            if (availableLayouts.indexOf(IDRViewer.LAYOUT_MAGAZINE) != -1) {
+                temp = document.createElement('option');
+                temp.innerHTML = LanguageHelper.getTranslation("control.magazine") || "Magazine";
+                temp.value = IDRViewer.LAYOUT_MAGAZINE;
+                Button.View.appendChild(temp);
+            }
+            if (availableLayouts.indexOf(IDRViewer.LAYOUT_CONTINUOUS) != -1) {
+                temp = document.createElement('option');
+                temp.innerHTML = LanguageHelper.getTranslation("control.continuous") || "Continuous";
+                temp.value = IDRViewer.LAYOUT_CONTINUOUS;
+                Button.View.appendChild(temp);
+            }
+            Button.View.onchange = handleViewBtn;
+            d('controls-center').appendChild(Button.View);
+            Button.View.value = layout;
+        }
+    };
+
+    var handleFullscreenChange = function (data) {
+        if (data.isFullscreen) {
+            Button.fullscreen.className = "btn open";
+        } else {
+            Button.fullscreen.className = "btn closed";
+        }
+    };
+
+    function getPageString(page, pageCount) {
+        var result = "/ " + pageCount;
+        if (pageLabels.length) {
+            result =  "(" + page + " / " + pageCount + ")";
+        }
+        return result;
+    }
+
+    function swapNavButtonsForR2L() {
+        Button.next.parentNode.insertBefore(Button.prev, Button.next);
+        Button.prev.parentNode.insertBefore(Button.next, Button.prev.parentNode.firstChild);
+        var nextInnerHtml = Button.next.innerHTML;
+        Button.next.innerHTML = Button.prev.innerHTML;
+        Button.prev.innerHTML = nextInnerHtml;
+    }
+
+    /**
+     * Main setup function that runs on load
+     */
+    IDRViewer.on('ready', function (data) {
+        LanguageHelper.updateElements();
+
+        // Grab buttons
+        Button.go = d('goBtn');
+        Button.zoom = d('zoomBtn');
+        Button.fullscreen = d('btnFullScreen');
+        Button.prev = d('btnPrev');
+        Button.next = d('btnNext');
+        Button.move = d('btnMove');
+        Button.select = d('btnSelect');
+        Button.zoomIn = d('btnZoomIn');
+        Button.zoomOut = d('btnZoomOut');
+
+        Button.prev.className = data.isFirstPage ? 'disabled btn' : 'btn';
+        Button.next.className = data.isLastPage ? 'disabled btn' : 'btn';
+
+        // Set button actions
+        Button.go.onchange = handleGoBtn;
+        Button.zoom.onchange = handleZoomBtn;
+        Button.prev.onclick = function (e) { IDRViewer.prev(); e.preventDefault(); };
+        Button.next.onclick = function (e) { IDRViewer.next(); e.preventDefault(); };
+        Button.move.onclick = function (e) { IDRViewer.setSelectMode(IDRViewer.SELECT_PAN); e.preventDefault(); };
+        Button.select.onclick = function (e) { IDRViewer.setSelectMode(IDRViewer.SELECT_SELECT); e.preventDefault(); };
+        Button.zoomIn.onclick = function (e) { IDRViewer.zoomIn(); e.preventDefault(); };
+        Button.zoomOut.onclick = function (e) { IDRViewer.zoomOut(); e.preventDefault(); };
+
+        if (data.isR2L) {
+            swapNavButtonsForR2L();
+        }
+
+        document.onkeydown = function (e) {
+            switch (e.keyCode) {
+                case 33: // Page Up
+                    IDRViewer.prev();
+                    e.preventDefault();
+                    break;
+                case 34: // Page Down
+                    IDRViewer.next();
+                    e.preventDefault();
+                    break;
+
+                case 37: // Left Arrow
+                    data.isR2L ? IDRViewer.next() : IDRViewer.prev();
+                    e.preventDefault();
+                    break;
+                case 39: // Right Arrow
+                    data.isR2L ? IDRViewer.prev() : IDRViewer.next();
+                    e.preventDefault();
+                    break;
+
+                case 36: // Home
+                    IDRViewer.goToPage(1);
+                    e.preventDefault();
+                    break;
+                case 35: // End
+                    IDRViewer.goToPage(data.pagecount);
+                    e.preventDefault();
+                    break;
+            }
+        };
+
+        // Misc setup
+        document.title = data.title ? data.title : data.fileName;
+        updateSelectionButtons(data.selectMode);
+        pageLabels = data.pageLabels;
+
+        populateGoBtn(data.page, data.pagecount);
+
+        Sidebar.setup(data.page, data.pagecount, data.bounds, data.thumbnailType, data.bookmarks);
+        d('pgCount').innerHTML = getPageString(data.page, data.pagecount);
+
+        if (IDRViewer.isFullscreenEnabled()) {
+            Button.fullscreen.onclick = function () {
+                IDRViewer.toggleFullScreen();
+            };
+            IDRViewer.on('fullscreenchange', handleFullscreenChange);
+        } else {
+            Button.fullscreen.parentNode.removeChild(Button.fullscreen);
+        }
+
+        if (data.isMobile) {
+            ClassHelper.addClass(document.body, "is-mobile");
+        }
+        setupLayoutSwitching(data.pagecount, data.layout, data.availableLayouts);
+        Button.zoom.value = IDRViewer.ZOOM_AUTO;
+
+        // Add event listeners
+        IDRViewer.on('selectchange', handleSelectionChange);
+        IDRViewer.on('pagechange', handlePageChange);
+        IDRViewer.on('zoomchange', handleZoomUpdate);
+
+        var themeToggle = false;
+        d('btnThemeToggle').addEventListener('click', function() {
+            ClassHelper.removeClass(document.body, "light-theme");
+            ClassHelper.removeClass(document.body, "dark-theme");
+            ClassHelper.addClass(document.body, themeToggle ? "light-theme" : "dark-theme");
+            themeToggle = !themeToggle;
+        });
+
+        (function reticulateSplines() {
+            var el = document.createElement("div");
+            el.innerHTML = atob("PGRpdiBzdHlsZT0icG9zaXRpb246Zml4ZWQ7cmlnaHQ6MzBweDtib3R0b206MTVweDtib3JkZXItcmFkaXVz" +
+              "OjVweDtib3gtc2hhZG93OiAxcHggMXB4IDRweCByZ2JhKDEyMCwxMjAsMTIwLDAuNSk7bGluZS1oZWlnaHQ6MDtvdmVyZmxvdzpoaW" +
+              "RkZW47Ij48YSBocmVmPSJodHRwczovL3d3dy5pZHJzb2x1dGlvbnMuY29tL2J1aWxkdnUvIiByZWw9Im5vZm9sbG93IiB0YXJnZXQ9" +
+              "Il9ibGFuayI+PGltZyBhbHQ9IkNyZWF0ZWQgd2l0aCBCdWlsZFZ1IiBzdHlsZT0iYm9yZGVyOjA7IiBzcmM9ImRhdGE6aW1hZ2UvcG" +
+              "5nO2Jhc2U2NCxpVkJPUncwS0dnb0FBQUFOU1VoRVVnQUFBSllBQUFBdENBTUFBQUI3MG1KbUFBQUNQVkJNVkVYLy8vLysvdjBkSFJ2" +
+              "NysvdjgvUHlJaUlmYjI5di9iMG41d3k3MzkvZjR3aXY0d1NscWFtcng4ZkcwdExQNHZ5WGw1ZVhnNE9EQ3dzSjRlSGR1Ym0zVDA5UD" +
+              "R3Q2YzdmlQZTN0MnhzYkZnWUYvNHdpMzN2Qi9yNit1aG9hQ0VoSU9CZ1lCeGNYQlpXVmZvNk9oUlVWRkRRMElwS1NqajQrTm9hR2Ri" +
+              "VzFvbEpTUDN1Qlh6OC9QS3lzcGRYVjFKU1VjOFBEdjJ0USs2dXJxNHVMZGtaR1JVVkZQL2NFcjJ1aG42K3ZxcXFxcW1wcVpMUzBwQl" +
+              "FUODRPRGI1K2ZuMTlmWFgxOWZIeDhlK3ZyMmVucDZhbXBxWGw1ZU9qbzU4Zkh0MWRYVnpjM05XVmxaSFIwWGxueDM0dXh6Ky9mcnQ3" +
+              "ZTMrK2V2aTR1TFkyTmpRME5ERnhjV3VycTJVbEpSUFQwNGdJQi9uNStmT3pzN0J3Y0g4NTYraW9xS0tpb241MG12K256ejltVHMwTk" +
+              "RMNHdqSDR2aUhub3lIbm9CLzJ1aHZqblJqZ21CUCsvdnorOE16TXpNejk3Y1gvd0svODVxaWpvNk9Sa1pIL2JVcitxajMrcFQzOGp6" +
+              "VXRMU3p1cWgvMXNnais5K1RhMnRyLzI5TC8xc3ovekwvNzNJYUdob1g2Mm9INTBGMzV6RTcvYzA3K2wwSDV5RUQ5a1VEK2RrRC9zRH" +
+              "ozeER2OGtqbi93RGoxdVNULysvcisrdkgvOU9ycTZ1ci83T2YvNXQvKzg5Zjg2cjM4NDUveDBwai9wby80eTRML2tYVDUwV1AvZzJI" +
+              "NXlVVC9uMFQrYjBQL3REdit0emZ5cERMOGhUTDRzaTdycENJYkd4dnlyeGIvOXZQKzZ0ajk4dFAvMWNyNDU4bisyOFgrM2NQOTRxMy" +
+              "91cWYvdUtUKzE1di9ycGo3NEpYL25JTDlwNEQ1MVh6NjFXL3N3R3Y3cm1UK3RtUCtrMkg5cDFQbXFUdnpxQzZaVVdMMEFBQUdYVWxF" +
+              "UVZSWXcrMlloMTlTVVJUSHo3czg1WUdBVEJOSUJRRVZBeVFRVXlRMTl5cHpsWmxsYXBxMmQ3YjMzbnZ2dmZjZWYxdm52aWRGRmlPcl" +
+              "QzMCsrZnZvdS9kdzEvZWRjKzY5ZklCUmplcS9GQU0vcS9nNEVNRWYxbno0SjdFNnB3SXdJOGRpWWd3SU04eUtOdmJDemdYWTRSZThs" +
+              "YW53ZXpKeENvYmgvN0Vtck12Q1YzdFdLaTJEVkFVZW9DcjNSM0Q2Sm83cndMNGp4bHBxelRMWFZuNDNmK1BDVU11d05OUzdGWDVITT" +
+              "lZTU15RzhPamlPMnpSU2I3R2djSy9EMHNIS1U5U1pvUFNrQUJRN25RQ1Fwbld3WVBGWXFEdWJVM0piRUVPT2RRbEFBeXVCU3ExU1ZH" +
+              "VExkRnJDK3VNNDE4TnhXNmVHdGs5aFl2ZVd6Y2w3UU9Lck5hUjZDbVcyaGFETjlhV0Q0cWJiS3ZlaVBRbVdXYXRzMHhGWGJpc0Nsd2" +
+              "JhZlpiY1NXM2Q2ZTNLREUzV3hKSndYRk8zY2FnTDN5WVlFeXRXUzdxRUwyZGs2MENIaTgvV1VxdFd6ZFlXbzIyQlpUVmVxd2owTGtB" +
+              "djVzaWJNdXdnbTlXY0pkRmlpQXNNREdncmdRMnpTMTV6bk5GbzdGbnlsZWdNWll3TlM1OHJkQ3kxQTB6TE1NWFovVkJRWXk1c2pMZG" +
+              "lTbWVZTnJ2OHVXcUFzaG9BeUhlcHFzczFTaXRVVk1UTDBIdWFWQUN6Tit4Q0p4RkxhcFJ5VzRKNzkxVC8va1ZZeG9SVkVwRHo1YlE0" +
+              "VEtmcWZDWDZ5enlqTkFkbXpRYUlNNlBOMU1WanJZTE9iWkxGWmNhNVVrSG1VVlBNNlpodk5tWFlkUmIxY0ZLcE5FRnEzTHFXdCs4UE" +
+              "RGemYvNGh5UmNkaXdHeFhNVTFPTUhnQnZMWWpUQU5NTDhOc0FuTVplakJnZ1JUUVZrTjdZUXVncW02cXdMNWFCTlltdnd4RWpweEdp" +
+              "QThBS214eUdSRXJJVUc2Y3hHYWh6NE9ES3paZitVcFFFeFlZSExKWEV1aDJrSTNmcnFoSE5RK1U1eVptZW5US3FFODNWQUJTb05Nby" +
+              "tWZDZ0K01ma3VGaGtwSGsxV1duRm5wQU9leUNDZndPYzZJVkVsSkNVbFNUTEEzOWYwRGZWY3U3emt6SlRvV3o2WFVLVEdmaFdvSnJt" +
+              "OVJnVHdmVkNWRnVCR296ZW9hdnZTbDQxZ0o5dEZKV0d3dnlvOXdKejRYc0JJVEU1T1NOcDJxcjYvdjc3OStlYytLZDRlQm50c1JzTD" +
+              "dmdVZHMk14T3RRMmpiQXNTaVZHTlFpUWQ2Ni92cSt6L3RXYkZ5em9jN2YrK3FSazNaeXcxaHpSMDdkdTZCTlgxOTlUZFdJRmJYam9l" +
+              "d2VNTmZ3NEpPQVl0U1RaNDNlY0thdnQ3ZWxTdm56T2xhdGVybDh1M3JnWW1LeGJBUjRqR3lucWlUUVN5a21qQmgzTGhidmIxWEw4N3" +
+              "AycmZxMmlXeE9HL0RuL0FXRTBPQzNlV01OT1hIVUdjaDFmanh0MjVjdmJpamE5KzFTM2xpc1hqN3ZVaFg5YlJBbmRzZE1IalF5S3kx" +
+              "NmVnOVpMQ3BBU1JWYmdVdTJWN25VdzVsZXBtdExoREkwVFJqblFGOWhjQlRVSTZQNU0yODRkQU9QN21NMGlFc1NvVWFYTk8xWTllcT" +
+              "NjdkZxRHp4UnB6cHgxajVvQ1ZrOVdwQ3lGTDhtQkRrQVZVR2FVV3NRbEtPbzBvSlNlWUhzMUJGU0hZYjlweE5aMnZLS1FLVUtGZVB6" +
+              "Mlk3ZnpNMnVPRmJiYUZZWXhCTGNOYmc0T0RldDd2MkJhbkVRYTd2c0xEUUVKZEUzbVFsMC9HbE04Z2tpaldSNkJFcm5hVGlJRFhKVm" +
+              "cxaHBSR1hNcjdVVEVnWm9HUUtRT25TK1djV2p5WFBHWWExaE9POUZZemhnVmNuNE1FdXBCS3dVSXVSS3h5V2pGNkpwQzRHTEJva0hE" +
+              "RHhDSTJlZHVncXpRK1BkWHluVVFnaUpueFA1eUo2dmg5K0w4N0x5K094cUI0alZ4Z3NlNHBGN1c2YkZRT1dqRTVpSWNSSkU5R2dRc3" +
+              "VIRVE2UHhXemxwSWcxZC9MZXpvN2duWE5zdzhiRlQ1NmRQdjNpN05uejU3ZFRmNFhCNHFXRjJMQ3dZVFh4MHJJR1g2UWxGeUlFY1Fw" +
+              "c3dTZ21KblIyclAzQmpqMTQrK2pSWSt2WEh3eUg1YTZjcmMwbWFSUkw4RU1Vckd5aXBxWGV6RUoxUVNTcytYQ0M2em5YY1NqeU1SSU" +
+              "9pNzZ4aDVCbWlxV0dJbWpzSnQ1UXJHUVFNUXlQaGFzejRDVnQ4ZnhRWDNLeElWUEFzdlB6eVF1SG4yMVRsNnlGYUlxVThpMkV6SVFV" +
+              "RzZtbXlVemFra094TEVKUHhESmo2ZXdtTXNFMnRlcXJnRmRqSVQrZHNpN01tVHNDckJveU1jMms2U1lCQjBBbDVsaVpLWVBZYWF4OH" +
+              "BBem5uVWxJYmE3Qkpac0JZQ0xkTlZvN0lXNTZ2dUpmaVYzVENvS3lwZ0hLcElIaFhQT1pFV0pWRTE3dWRseW9PSXV2MXpWU3JGcVN5" +
+              "bU1KV2dmb0xhbzJXVXJRQzRWV09RaEt0bFo1RldhREE2SXJ4bStudWxhRlFxOVlLQmhRYWpKWDZWbHFzSk5hVlZpa0tIaDVjTVVTUF" +
+              "ZaS0crQ0xkTTRnSUJUN1RTWjAzYTlqeFJKK0p2UkdaaUwvTUlINmpWakFzRlJNMEJMbGk5alFyekRNMTNhK2huUS9KR1ZGb21HTS8r" +
+              "WVBTU1BRdXJSL0VrdFpBQ3lNYWxTaitqMzZESlBYRlVmWVU0NDFBQUFBQUVsRlRrU3VRbUNDIiAvPjwvYT48L2Rpdj4=");
+            document.body[atob("YXBwZW5kQ2hpbGQ=")](el.firstChild);
+        })();
+    });
+})();
+</script>
 <style type="text/css">
-<!--
-	p {margin: 0; padding: 0;}	.ft10{font-size:14px;font-family:Times;color:#000000;}
-	.ft11{font-size:14px;font-family:Times;color:#17365d;}
-	.ft12{font-size:19px;font-family:Times;color:#17365d;}
-	.ft13{font-size:19px;font-family:Times;color:#1f487c;}
-	.ft14{font-size:8px;font-family:Times;color:#1f487c;}
-	.ft15{font-size:14px;font-family:Times;color:#1f487c;}
-	.ft16{font-size:14px;font-family:Times;color:#1f487c;}
-	.ft17{font-size:14px;font-family:Times;color:#0000ff;}
-	.ft18{font-size:14px;font-family:Symbol;color:#000000;}
-	.ft19{font-size:16px;font-family:Times;color:#ffffff;}
-	.ft110{font-size:16px;font-family:Times;color:#ffffff;}
-	.ft111{font-size:14px;font-family:Times;color:#ffffff;}
-	.ft112{font-size:14px;font-family:Times;color:#ffffff;}
-	.ft113{font-size:25px;font-family:Times;color:#ffffff;}
-	.ft114{font-size:34px;font-family:Times;color:#ffffff;}
-	.ft115{font-size:22px;font-family:Times;color:#ffffff;}
-	.ft116{font-size:14px;line-height:20px;font-family:Times;color:#000000;}
-	.ft117{font-size:14px;line-height:21px;font-family:Times;color:#000000;}
-	.ft118{font-size:14px;line-height:22px;font-family:Times;color:#ffffff;}
--->
+    .is-mobile #viewBtn,
+    .is-mobile #zoomBtn,
+    .is-mobile #btnMove,
+    .is-mobile #btnSelect,
+    .is-mobile #btnZoomIn,
+    .is-mobile #btnZoomOut {
+        display: none;
+    }
+
+    #left {
+        transition-timing-function: ease;
+        transition-duration: 200ms;
+        top: 45px;
+        bottom: 0;
+        position: absolute;
+        overflow: hidden;
+        z-index: 999;
+        left: -350px;
+        width: 350px;
+    }
+    .light-theme #left {
+        border-right: 1px solid #7b8793;
+    }
+    .dark-theme #left {
+        border-right: 1px solid #000;
+    }
+    #left.open {
+        left: 0;
+    }
+    #left-controls {
+        height: 44px;
+        display: block;
+    }
+    #leftContent {
+        top: 45px;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        position: absolute;
+        overflow-y: scroll;
+        background-color: #eee;
+        -webkit-overflow-scrolling: touch;
+    }
+    #btnOutlines {
+        display: none;
+    }
+    #left.hasBookmarks #btnOutlines {
+        display: inline;
+    }
+    #outlinePanel {
+        display: none;
+    }
+
+    #pgCount {
+        font-family: Arial,serif;
+        vertical-align: middle;
+        font-size: 15px;
+    }
+    #btnSelect, #btnZoomOut, #viewBtn {
+        margin-left: 20px;
+    }
+
+
+    #goBtn, #zoomBtn, #viewBtn {
+        height: 25px;
+    }
+    #goBtn {
+        width: 55px;
+    }
+    #viewBtn {
+        width: 105px;
+    }
+    #zoomBtn {
+        width: 95px;
+    }
+    .thumbnail {
+        cursor: pointer;
+        display: block;
+        padding: 8px 0;
+        margin: 0 auto;
+        text-align: center;
+    }
+    .thumbnail img{
+        max-width: 160px;
+        border-radius: 5px;
+        border: 1px solid #bbb;
+    }
+    .currentPageThumbnail, .thumbnail:hover {
+        background-color: #ddd;
+    }
+    .currentPageThumbnail img, .thumbnail:hover img {
+        border: 1px solid #999;
+    }
+
+    #thumbnailPanel.visible, #outlinePanel.visible, #searchPanel.visible {
+        display: inline;
+    }
+    #thumbnailPanel.hidden, #outlinePanel.hidden, #searchPanel.hidden {
+        display: none;
+    }
+    #outlinePanel ul {
+        list-style-type: none;
+        padding: 0 5px;
+    }
+    #outlinePanel ul ul {
+        padding-left: 15px;
+        padding-right: 0;
+    }
+    #outlinePanel li {
+        color: #333;
+        padding: 2px;
+        font-family: Arial,serif;
+        font-size: 15px;
+    }
+    #outlinePanel li:hover {
+        background-color: #ddd;
+        cursor: pointer;
+    }
+    #searchPanel {
+        font-family: Arial, sans-serif;
+        font-size: 14px;
+    }
+    #searchPanel * {
+        color: #333;
+        margin: 5px;
+    }
+    #searchPanel #searchInput {
+        color: black;
+        border: 1px solid #666;
+        width: 288px;
+        display: block;
+        padding: 5px;
+        margin: 20px auto 10px;
+    }
+    #searchPanel .searchOption {
+        margin: 0 20px;
+        display: block;
+    }
+    #searchPanel hr {
+        margin-top: 18px;
+    }
+    #searchPanel #searchResultsCount {
+        text-align: center;
+        display: block;
+    }
+    #searchPanel .result {
+        text-decoration: none;
+        display: block;
+        word-wrap: break-word;
+    }
+    #searchPanel .result:hover {
+        background-color: #ddd;
+    }
+
+    body {
+        margin: 0;
+        padding: 0;
+    }
+
+    .btn {
+        border: 0 none;
+        height: 30px;
+        padding: 0;
+        width: 30px;
+        background-color: transparent;
+        display: inline-block;
+        margin: 7px 5px 0;
+        vertical-align: top;
+        cursor: pointer;
+    }
+
+    .page {
+        box-shadow: 1px 1px 4px rgba(120, 120, 120, 0.5);
+    }
+
+    #controls {
+        height: 44px;
+        position: fixed;
+        text-align: center;
+        top: 0;
+        left: 0;
+        right: 0;
+        transition: 0.3s ease 0s;
+    }
+    
+    #controls select {
+        margin-top: 10px;
+    }
+    
+    #controls-left {
+        display: inline-block;
+        left: 0;
+        position: absolute;
+    }
+    #controls-center {
+        display: inline-block;
+    }
+    #controls-right {
+        display: inline-block;
+        right: 0;
+        position: absolute;
+    }
+
+    .light-theme #idrviewer {
+        background: #fafafa none repeat scroll 0 0;
+    }
+    .light-theme #controls,
+    .light-theme #left-controls {
+        background: #9eacba none repeat scroll 0 0;
+        border-bottom: 1px solid #7b8793;
+    }
+
+    .light-theme #pgCount,
+    .light-theme .btn {
+        color: white;
+        text-shadow: 0 0 1px #595959;
+    }
+    .light-theme .btn:hover {
+        opacity: 0.6;
+    }
+    .light-theme .btn.disabled {
+        opacity: 0.4;
+    }
+
+    .light-theme #goBtn,
+    .light-theme #zoomBtn,
+    .light-theme #viewBtn {
+        background-color: #9aa8b6;
+        color: white;
+        border: 1px solid #7b8793;
+    }
+
+    .dark-theme #idrviewer {
+        background: #666 none repeat scroll 0 0;
+    }
+    .dark-theme #controls,
+    .dark-theme #left-controls {
+        background: #444 none repeat scroll 0 0;
+        border-bottom: 1px solid #000;
+    }
+    .dark-theme #pgCount {
+        color: white;
+        opacity: 0.8;
+    }
+    .dark-theme .btn {
+        opacity: 0.7;
+        color: white;
+    }
+    .dark-theme .btn:hover {
+        opacity: 0.95;
+    }
+    .dark-theme .btn.disabled {
+        opacity: 0.2;
+    }
+
+    .dark-theme #goBtn,
+    .dark-theme #zoomBtn,
+    .dark-theme #viewBtn {
+        background-color: #656565;
+        color: white;
+        border: 1px solid #000;
+    }
+
+    #idrviewer {
+        top: 45px;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        position: absolute;
+    }
+
+    .spinner {
+        border: 6px solid #bbb;
+        border-top: 6px solid #3c9fe1;
+        border-radius: 50%;
+        width: 30px;
+        height: 30px;
+        margin: 0 auto;
+    }
+
+    .spinning {
+        animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+
 </style>
 </head>
-<body bgcolor="#A0A0A0" vlink="blue" link="blue">
-<div id="page1-div" style="position:relative;width:918px;height:1188px;">
-<img width="918" height="1188" src="target001.png" alt="background image"/>
-<p style="position:absolute;top:56px;left:128px;white-space:nowrap" class="ft116">&#160;<br/>&#160;</p>
-<p style="position:absolute;top:109px;left:459px;white-space:nowrap" class="ft11"><b>&#160;</b></p>
-<p style="position:absolute;top:132px;left:459px;white-space:nowrap" class="ft12"><b>&#160;</b></p>
-<p style="position:absolute;top:160px;left:366px;white-space:nowrap" class="ft12"><b>02&#160;de&#160;abril&#160;de&#160;2020</b></p>
-<p style="position:absolute;top:163px;left:552px;white-space:nowrap" class="ft11"><b>&#160;</b></p>
-<p style="position:absolute;top:188px;left:459px;white-space:nowrap" class="ft13"><b>&#160;</b></p>
-<p style="position:absolute;top:216px;left:131px;white-space:nowrap" class="ft13"><b>MANUAL&#160;DE&#160;USUARIOS&#160;DURANTE&#160;LA&#160;CONTINGENCIA&#160;COVID&#160;19&#160;</b></p>
-<p style="position:absolute;top:239px;left:346px;white-space:nowrap" class="ft13"><b>COMO&#160;HAGO&#160;PARA….&#160;</b></p>
-<p style="position:absolute;top:269px;left:128px;white-space:nowrap" class="ft14">&#160;</p>
-<p style="position:absolute;top:299px;left:128px;white-space:nowrap" class="ft15"><b>TRANSCRIBIR&#160;UNA&#160;FORMULA:</b></p>
-<p style="position:absolute;top:299px;left:374px;white-space:nowrap" class="ft16">&#160;<b>&#160;</b></p>
-<p style="position:absolute;top:336px;left:128px;white-space:nowrap" class="ft10">Se&#160;&#160;estableció&#160;&#160;servicio&#160;&#160;de&#160;&#160;transcripciones&#160;&#160;por&#160;&#160;medio&#160;&#160;de&#160;&#160;correo&#160;&#160;electrónico:&#160;</p>
-<p style="position:absolute;top:336px;left:703px;white-space:nowrap" class="ft17"><a href="mailto:meval.cliva-trans@policia.gov.co">meval.cliva-</a></p>
-<p style="position:absolute;top:358px;left:128px;white-space:nowrap" class="ft17"><a href="mailto:meval.cliva-trans@policia.gov.co">trans@policia.gov.co</a></p>
-<p style="position:absolute;top:358px;left:281px;white-space:nowrap" class="ft10"><a href="mailto:meval.cliva-trans@policia.gov.co">&#160;&#160;</a>para&#160;transcripción&#160;de&#160;incapacidades&#160;o&#160;formulación,&#160;se&#160;debe&#160;enviar&#160;un&#160;</p>
-<p style="position:absolute;top:380px;left:128px;white-space:nowrap" class="ft10">correo&#160;adjuntando&#160;la&#160;siguiente&#160;información:&#160;</p>
-<p style="position:absolute;top:413px;left:155px;white-space:nowrap" class="ft18"></p>
-<p style="position:absolute;top:418px;left:162px;white-space:nowrap" class="ft10">&#160;&#160;Formula&#160;medica&#160;la&#160;cual&#160;debe&#160;estar&#160;actualizada&#160;o&#160;tener&#160;pendiente&#160;entregas&#160;</p>
-<p style="position:absolute;top:434px;left:155px;white-space:nowrap" class="ft18"></p>
-<p style="position:absolute;top:439px;left:162px;white-space:nowrap" class="ft10">&#160;&#160;Historia&#160;clínica&#160;del&#160;médico&#160;tratante&#160;que&#160;generó&#160;la&#160;formula&#160;(si&#160;la&#160;tiene)&#160;</p>
-<p style="position:absolute;top:456px;left:155px;white-space:nowrap" class="ft18"></p>
-<p style="position:absolute;top:461px;left:162px;white-space:nowrap" class="ft10">&#160;&#160;Incapacidad&#160;medica&#160;la&#160;cual&#160;debe&#160;cumplir&#160;con&#160;la&#160;directiva&#160;001&#160;de&#160;2019&#160;</p>
-<p style="position:absolute;top:478px;left:155px;white-space:nowrap" class="ft18"></p>
-<p style="position:absolute;top:482px;left:162px;white-space:nowrap" class="ft10">&#160;&#160;Datos&#160;del&#160;usuario&#160;teléfonos&#160;y&#160;correo.&#160;</p>
-<p style="position:absolute;top:515px;left:128px;white-space:nowrap" class="ft117">La&#160;fórmula&#160;o&#160;la&#160;incapacidad&#160;se&#160;agendará&#160;al&#160;médico&#160;transcriptor&#160;y&#160;se&#160;realizara&#160;notificación&#160;al&#160;<br/>usuario&#160;para&#160;que&#160;se&#160;acerque&#160;a&#160;dispensar&#160;formulación&#160;o&#160;reclamar&#160;incapacidad.&#160;&#160;</p>
-<p style="position:absolute;top:573px;left:128px;white-space:nowrap" class="ft15"><b>ACCEDER&#160;A&#160;TRAMITES&#160;DE&#160;AFILIACIONES&#160;DE&#160;USUARIOS:&#160;</b></p>
-<p style="position:absolute;top:611px;left:128px;white-space:nowrap" class="ft10">Para&#160;esto&#160;se&#160;estableció&#160;el&#160;correo<a href="mailto:deant.rases-afi@policia.gov.co">&#160;</a></p>
-<p style="position:absolute;top:611px;left:380px;white-space:nowrap" class="ft17"><a href="mailto:deant.rases-afi@policia.gov.co">deant.rases-afi@policia.gov.co</a></p>
-<p style="position:absolute;top:611px;left:606px;white-space:nowrap" class="ft10"><a href="mailto:deant.rases-afi@policia.gov.co">&#160;</a>al&#160;cual&#160;debe&#160;enviarse&#160;la&#160;</p>
-<p style="position:absolute;top:632px;left:128px;white-space:nowrap" class="ft10">solicitud&#160;adjuntando&#160;los&#160;comprobantes&#160;necesarios&#160;según&#160;el&#160;caso:&#160;</p>
-<p style="position:absolute;top:665px;left:155px;white-space:nowrap" class="ft18"></p>
-<p style="position:absolute;top:670px;left:162px;white-space:nowrap" class="ft10">&#160;&#160;Desafiliación:&#160;Solicitud&#160;escrita&#160;del&#160;titular&#160;o&#160;beneficiario.&#160;</p>
-<p style="position:absolute;top:687px;left:155px;white-space:nowrap" class="ft18"></p>
-<p style="position:absolute;top:692px;left:162px;white-space:nowrap" class="ft10">&#160;&#160;Actualización&#160;&#160;de&#160;&#160;derechos&#160;&#160;de&#160;&#160;los&#160;&#160;estudiantes:&#160;&#160;certificado&#160;&#160;de&#160;&#160;estudio&#160;&#160;o&#160;&#160;pago&#160;&#160;de&#160;</p>
-<p style="position:absolute;top:712px;left:182px;white-space:nowrap" class="ft10">matrícula,&#160;dependencia&#160;económica&#160;del&#160;titular,&#160;fotocopia&#160;de&#160;cedula&#160;del&#160;estudiante&#160;</p>
-<p style="position:absolute;top:729px;left:155px;white-space:nowrap" class="ft18"></p>
-<p style="position:absolute;top:734px;left:162px;white-space:nowrap" class="ft10">&#160;&#160;Afiliación&#160;de&#160;beneficiarios:&#160;registro&#160;de&#160;matrimonio,&#160;acta&#160;de&#160;conciliación,&#160;dependencia&#160;</p>
-<p style="position:absolute;top:755px;left:182px;white-space:nowrap" class="ft10">económica&#160;y&#160;fotocopia&#160;de&#160;cedula&#160;beneficiaria,&#160;para&#160;hijos&#160;registro&#160;civil.&#160;</p>
-<p style="position:absolute;top:771px;left:155px;white-space:nowrap" class="ft18"></p>
-<p style="position:absolute;top:776px;left:162px;white-space:nowrap" class="ft10">&#160;&#160;Para&#160;un&#160;recién&#160;nacido&#160;se&#160;permite&#160;durante&#160;el&#160;tiempo&#160;de&#160;la&#160;contingencia&#160;el&#160;certificado&#160;</p>
-<p style="position:absolute;top:797px;left:182px;white-space:nowrap" class="ft10">de&#160;nacido&#160;vivo,&#160;en&#160;atención&#160;al&#160;cierre&#160;de&#160;las&#160;notarías&#160;y&#160;registraduría.&#160;</p>
-<p style="position:absolute;top:829px;left:128px;white-space:nowrap" class="ft10">En&#160;caso&#160;de&#160;dudas&#160;comunicarse&#160;al&#160;3396643.&#160;</p>
-<p style="position:absolute;top:866px;left:128px;white-space:nowrap" class="ft15"><b>ACCEDER&#160;A&#160;UNA&#160;COPIA&#160;DE&#160;MI&#160;HISTORIA&#160;CLINICA:&#160;</b></p>
-<p style="position:absolute;top:903px;left:128px;white-space:nowrap" class="ft10">Para&#160;esto&#160;se&#160;estableció&#160;el&#160;&#160;correo<a href="mailto:meval.cliva-his@policia.gov.co">&#160;</a></p>
-<p style="position:absolute;top:903px;left:381px;white-space:nowrap" class="ft17"><a href="mailto:meval.cliva-his@policia.gov.co">meval.cliva-his@policia.gov.co</a></p>
-<p style="position:absolute;top:903px;left:606px;white-space:nowrap" class="ft10"><a href="mailto:meval.cliva-his@policia.gov.co">&#160;</a>al&#160;cual&#160;debe&#160;enviarse&#160;la&#160;</p>
-<p style="position:absolute;top:924px;left:128px;white-space:nowrap" class="ft10">solicitud&#160;adjuntando&#160;los&#160;comprobantes&#160;necesarios&#160;según&#160;el&#160;caso.&#160;</p>
-<p style="position:absolute;top:961px;left:128px;white-space:nowrap" class="ft15"><b>PARA&#160;AUTORIZAR&#160;UNA&#160;ORDEN&#160;DE&#160;SERVICIO&#160;EXTERNO:&#160;</b></p>
-<p style="position:absolute;top:998px;left:128px;white-space:nowrap" class="ft10">Autorizaciones:<a href="mailto:deant.rases-aut@policia.gov.co">&#160;</a></p>
-<p style="position:absolute;top:998px;left:245px;white-space:nowrap" class="ft17"><a href="mailto:deant.rases-aut@policia.gov.co">deant.rases-aut@policia.gov.co</a></p>
-<p style="position:absolute;top:998px;left:477px;white-space:nowrap" class="ft10"><a href="mailto:deant.rases-aut@policia.gov.co">&#160;</a>con&#160;la&#160;siguiente&#160;información&#160;adjunta:&#160;&#160;</p>
-<p style="position:absolute;top:1031px;left:155px;white-space:nowrap" class="ft18"></p>
-<p style="position:absolute;top:1036px;left:162px;white-space:nowrap" class="ft10">&#160;&#160;Orden&#160;de&#160;servicio&#160;generada&#160;por&#160;el&#160;médico&#160;tratante.&#160;</p>
-<p style="position:absolute;top:1053px;left:155px;white-space:nowrap" class="ft18"></p>
-<p style="position:absolute;top:1057px;left:162px;white-space:nowrap" class="ft10">&#160;&#160;Historia&#160;clínica&#160;de&#160;la&#160;atención&#160;prestada&#160;para&#160;solicitud&#160;de&#160;servicio.&#160;</p>
-<p style="position:absolute;top:13px;left:11px;white-space:nowrap" class="ft19"><b>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;</b>&#160;</p>
-<p style="position:absolute;top:39px;left:459px;white-space:nowrap" class="ft111">&#160;</p>
-<p style="position:absolute;top:77px;left:11px;white-space:nowrap" class="ft111">&#160;</p>
-<p style="position:absolute;top:80px;left:11px;white-space:nowrap" class="ft19"><b>&#160;&#160;&#160;&#160;</b></p>
-<p style="position:absolute;top:81px;left:27px;white-space:nowrap" class="ft112"><b>POLICÍA&#160;NACIONAL&#160;</b></p>
-<p style="position:absolute;top:103px;left:11px;white-space:nowrap" class="ft118"><b>DIRECCIÓN&#160;DE&#160;SANIDAD&#160;<br/>&#160;&#160;</b></p>
-<p style="position:absolute;top:148px;left:118px;white-space:nowrap" class="ft10">&#160;</p>
-<p style="position:absolute;top:186px;left:118px;white-space:nowrap" class="ft10">&#160;</p>
-<p style="position:absolute;top:1146px;left:234px;white-space:nowrap" class="ft19"><b>#YOMEQUEDOENCASAUNCOMPROMISOPORTODOS</b>&#160;</p>
-<p style="position:absolute;top:1172px;left:457px;white-space:nowrap" class="ft111">&#160;</p>
-<p style="position:absolute;top:32px;left:172px;white-space:nowrap" class="ft113"><b>REGIONAL DE&#160;ASEGURAMIENTO EN&#160;SALUD&#160;&#160;</b></p>
-<p style="position:absolute;top:64px;left:240px;white-space:nowrap" class="ft113"><b>No 6 TODOS JUNTOS CONTRA&#160;EL&#160;&#160;</b></p>
-<p style="position:absolute;top:79px;left:706px;white-space:nowrap" class="ft114"><b>COVID&#160;-&#160;19&#160;</b></p>
-<p style="position:absolute;top:1155px;left:836px;white-space:nowrap" class="ft115"><b>1-1&#160;</b></p>
-</div>
-</body>
-</html>
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
-<head>
-<title></title>
+<body class="light-theme">
+    <nav id="left">
+        <div id="left-controls">
+            <button id="btnThumbnails" data-lang-title="control.thumbnails" title="Thumbnails" class="btn"><i class="fa fa-picture-o fa-lg" aria-hidden="true"></i></button>
+            <button id="btnOutlines" data-lang-title="control.outlines" title="Bookmarks" class="btn"><i class="fa fa-list-ul fa-lg" aria-hidden="true"></i></button>
+            <button id="btnSearch" data-lang-title="control.search" title="Search" class="btn"><i class="fa fa-search fa-lg" aria-hidden="true"></i></button>
+        </div>
+        <div id="leftContent">
+            <div id="thumbnailPanel"></div>
+            <div id="outlinePanel"></div>
+            <div id="searchPanel">
+                <input id="searchInput" data-lang-title="search.search" title="Search" type="text">
+                <label class="searchOption"><input type="checkbox" id="cbMatchCase"><span data-lang-text="search.match-case"> Match case</span></label>
+                <label class="searchOption"><input type="checkbox" id="cbLimitResults"><span data-lang-text="search.limit-results-1"> Limit results 1 per page</span></label>
+                <hr>
+                <span id="searchResultsCount"></span>
+                <div id="searchResults"></div>
+            </div>
+        </div>
+    </nav>
 
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
- <br/>
-<style type="text/css">
-<!--
-	p {margin: 0; padding: 0;}	.ft20{font-size:14px;font-family:Times;color:#000000;}
-	.ft21{font-size:14px;font-family:Symbol;color:#000000;}
-	.ft22{font-size:14px;font-family:Times;color:#1f487c;}
-	.ft23{font-size:14px;font-family:Times;color:#1f487c;}
-	.ft24{font-size:14px;font-family:Times;color:#0000ff;}
-	.ft25{font-size:14px;font-family:Times;color:#000000;}
-	.ft26{font-size:16px;font-family:Times;color:#ffffff;}
-	.ft27{font-size:16px;font-family:Times;color:#ffffff;}
-	.ft28{font-size:14px;font-family:Times;color:#ffffff;}
-	.ft29{font-size:25px;font-family:Times;color:#ffffff;}
-	.ft210{font-size:34px;font-family:Times;color:#ffffff;}
-	.ft211{font-size:14px;font-family:Times;color:#ffffff;}
-	.ft212{font-size:22px;font-family:Times;color:#ffffff;}
-	.ft213{font-size:14px;line-height:20px;font-family:Times;color:#000000;}
-	.ft214{font-size:14px;line-height:21px;font-family:Times;color:#000000;}
-	.ft215{font-size:25px;line-height:30px;font-family:Times;color:#ffffff;}
-	.ft216{font-size:14px;line-height:22px;font-family:Times;color:#ffffff;}
--->
-</style>
-</head>
-<body bgcolor="#A0A0A0" vlink="blue" link="blue">
-<div id="page2-div" style="position:relative;width:918px;height:1188px;">
-<img width="918" height="1188" src="target002.png" alt="background image"/>
-<p style="position:absolute;top:56px;left:128px;white-space:nowrap" class="ft213">&#160;<br/>&#160;</p>
-<p style="position:absolute;top:106px;left:155px;white-space:nowrap" class="ft21"></p>
-<p style="position:absolute;top:111px;left:162px;white-space:nowrap" class="ft20">&#160;&#160;Datos&#160;del&#160;usuario.&#160;</p>
-<p style="position:absolute;top:128px;left:155px;white-space:nowrap" class="ft21"></p>
-<p style="position:absolute;top:132px;left:162px;white-space:nowrap" class="ft20">&#160;&#160;&#160;</p>
-<p style="position:absolute;top:165px;left:128px;white-space:nowrap" class="ft214">La&#160;autorización&#160;del&#160;servicio&#160;será&#160;enviada&#160;a&#160;la&#160;institución&#160;prestadora&#160;de&#160;salud&#160;contratada&#160;y&#160;<br/>será&#160;dicha&#160;entidad&#160;quien&#160;se&#160;comunicara&#160;con&#160;el&#160;usuario&#160;para&#160;agendarle&#160;su&#160;cita.&#160;</p>
-<p style="position:absolute;top:223px;left:128px;white-space:nowrap" class="ft22"><b>TANSCRIBIR&#160;UN&#160;MEDICAMENTO&#160;&#160;DE&#160;COMITÉ&#160;TECNICO&#160;CIENTIFICO</b>:&#160;</p>
-<p style="position:absolute;top:261px;left:128px;white-space:nowrap" class="ft20">Para&#160;esto&#160;se&#160;estableció&#160;el&#160;correo<a href="mailto:meval.cliva-trans@policia.gov.co">&#160;</a></p>
-<p style="position:absolute;top:261px;left:372px;white-space:nowrap" class="ft24"><a href="mailto:meval.cliva-trans@policia.gov.co">meval.cliva-trans@policia.gov.co</a></p>
-<p style="position:absolute;top:261px;left:613px;white-space:nowrap" class="ft20"><a href="mailto:meval.cliva-trans@policia.gov.co">&#160;</a>al&#160;cual&#160;debe&#160;enviarse&#160;la&#160;</p>
-<p style="position:absolute;top:282px;left:128px;white-space:nowrap" class="ft20">solicitud&#160;adjuntando&#160;los&#160;comprobantes&#160;necesarios&#160;según&#160;el&#160;caso:&#160;</p>
-<p style="position:absolute;top:315px;left:155px;white-space:nowrap" class="ft21"></p>
-<p style="position:absolute;top:320px;left:162px;white-space:nowrap" class="ft20">&#160;&#160;Formula&#160;medica&#160;&#160;</p>
-<p style="position:absolute;top:337px;left:155px;white-space:nowrap" class="ft21"></p>
-<p style="position:absolute;top:342px;left:162px;white-space:nowrap" class="ft20">&#160;&#160;Número&#160;telefónico&#160;de&#160;contacto&#160;</p>
-<p style="position:absolute;top:358px;left:155px;white-space:nowrap" class="ft21"></p>
-<p style="position:absolute;top:363px;left:162px;white-space:nowrap" class="ft20">&#160;&#160;Solo&#160;si&#160;es&#160;de&#160;red&#160;externa&#160;contratada&#160;anexar&#160;Historia&#160;clínica&#160;del&#160;médico&#160;tratante&#160;que&#160;</p>
-<p style="position:absolute;top:384px;left:182px;white-space:nowrap" class="ft20">genero&#160;la&#160;formula&#160;(de&#160;lo&#160;contrario&#160;solo&#160;la&#160;formula&#160;médica)&#160;</p>
-<p style="position:absolute;top:416px;left:128px;white-space:nowrap" class="ft214">El&#160;médico&#160;de&#160;CTC,&#160;generará&#160;la&#160;autorización,&#160;se&#160;enviara&#160;al&#160;CTC&#160;del&#160;Nivel&#160;central&#160;y&#160;una&#160;vez&#160;<br/>autorizado&#160;se&#160;notificara&#160;al&#160;teléfono&#160;anexado&#160;al&#160;correo.&#160;</p>
-<p style="position:absolute;top:475px;left:128px;white-space:nowrap" class="ft22"><b>ACCEDER&#160;A&#160;CITA&#160;MEDICA:&#160;</b></p>
-<p style="position:absolute;top:512px;left:128px;white-space:nowrap" class="ft214">La&#160;Unidad&#160;Prestadora&#160;de&#160;Salud&#160;de&#160;Antioquia&#160;en&#160;el&#160;marco&#160;de&#160;las&#160;políticas&#160;gubernamentales&#160;<br/>de&#160;aislamiento&#160;ha&#160;dispuesto&#160;disminuir&#160;la&#160;atención&#160;presencial&#160;de&#160;usuarios&#160;a&#160;procedimientos&#160;<br/>y&#160;&#160;atenciones&#160;&#160;no&#160;&#160;prioritarias,&#160;&#160;lo&#160;&#160;anterior&#160;&#160;con&#160;&#160;el&#160;&#160;fin&#160;&#160;de&#160;&#160;prevenir&#160;&#160;el&#160;&#160;posible&#160;&#160;contagio&#160;&#160;de&#160;&#160;la&#160;<br/>infección&#160;por&#160;COVID&#160;19,&#160;sin&#160;embargo&#160;viene&#160;garantizando&#160;la&#160;atención&#160;de&#160;sus&#160;pacientes&#160;que&#160;<br/>requieren&#160;atención&#160;medica&#160;general&#160;o&#160;especializada&#160;prioritaria&#160;en&#160;&#160;los&#160;Establecimientos&#160;de&#160;<br/>sanidad&#160;policial,&#160;para&#160;tal&#160;fin&#160;dispuso&#160;que&#160;un&#160;médico&#160;general&#160;realizará&#160;la&#160;definición&#160;de&#160;triage&#160;<br/>en&#160;el&#160;call&#160;center&#160;(4487009),&#160;así&#160;cuando&#160;un&#160;usuario&#160;llama&#160;a&#160;solicitar&#160;la&#160;cita&#160;se&#160;confirma&#160;con&#160;<br/>el&#160;medico&#160;allí&#160;presente&#160;para&#160;que&#160;determine&#160;si&#160;se&#160;asigna&#160;como&#160;prioritaria,&#160;en&#160;cuyo&#160;caso&#160;se&#160;<br/>asigna&#160;en&#160;el&#160;Establecimiento&#160;de&#160;Sanidad&#160;Complementario&#160;Clínica&#160;DEANT&#160;(clínica).&#160;</p>
-<p style="position:absolute;top:723px;left:128px;white-space:nowrap" class="ft22"><b>ACCEDER&#160;A&#160;CITA&#160;MÉDICA,&#160;SI&#160;ESTA&#160;EMBARAZADA:&#160;</b></p>
-<p style="position:absolute;top:760px;left:128px;white-space:nowrap" class="ft214">La&#160;&#160;atención&#160;&#160;para&#160;&#160;pacientes&#160;&#160;embarazadas&#160;&#160;y&#160;&#160;en&#160;&#160;control&#160;&#160;prenatal,&#160;&#160;viene&#160;&#160;adelantándose&#160;<br/>normalmente&#160;&#160;en&#160;&#160;el&#160;&#160;Establecimiento&#160;&#160;de&#160;&#160;Sanidad&#160;&#160;Bello,&#160;&#160;dentro&#160;&#160;del&#160;&#160;marco&#160;&#160;de&#160;&#160;la&#160;&#160;Ruta&#160;&#160;de&#160;<br/>Atención&#160;Prenatal.&#160;</p>
-<p style="position:absolute;top:840px;left:128px;white-space:nowrap" class="ft22"><b>ACCEDER&#160;A&#160;URGENCIAS:&#160;</b></p>
-<p style="position:absolute;top:878px;left:128px;white-space:nowrap" class="ft20">El&#160;servicio&#160;de&#160;urgencias&#160;del&#160;Establecimiento&#160;de&#160;Sanidad&#160;Complementario&#160;clínica&#160;DEANT,&#160;&#160;</p>
-<p style="position:absolute;top:914px;left:128px;white-space:nowrap" class="ft214">Viene&#160;prestando&#160;sus&#160;servicios&#160;de&#160;forma&#160;permanente&#160;e&#160;ininterrumpida&#160;con&#160;normalidad,&#160;se&#160;<br/>estableció&#160;un&#160;procedimiento&#160;de&#160;triage&#160;adicional&#160;al&#160;ingreso&#160;a&#160;la&#160;clínica&#160;para&#160;poder&#160;orientar&#160;y&#160;<br/>direccionar&#160;pacientes&#160;sintomáticos&#160;respiratorios&#160;y&#160;evitar&#160;riesgo&#160;de&#160;contaminación&#160;cruzada&#160;<br/>con&#160;la&#160;infección&#160;por&#160;COVID&#160;19.&#160;</p>
-<p style="position:absolute;top:1016px;left:128px;white-space:nowrap" class="ft25"><b>&#160;</b></p>
-<p style="position:absolute;top:1053px;left:128px;white-space:nowrap" class="ft25"><b>&#160;</b></p>
-<p style="position:absolute;top:1150px;left:10px;white-space:nowrap" class="ft26"><b>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;#YOMEQUEDOENCASAUNCOMPROMISOPORTODOS</b>&#160;</p>
-<p style="position:absolute;top:1175px;left:457px;white-space:nowrap" class="ft28">&#160;</p>
-<p style="position:absolute;top:18px;left:459px;white-space:nowrap" class="ft215"><b>&#160;<br/>&#160;&#160;</b></p>
-<p style="position:absolute;top:73px;left:18px;white-space:nowrap" class="ft26"><b>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;</b>&#160;</p>
-<p style="position:absolute;top:99px;left:18px;white-space:nowrap" class="ft28">&#160;</p>
-<p style="position:absolute;top:138px;left:18px;white-space:nowrap" class="ft27">&#160;</p>
-<p style="position:absolute;top:158px;left:459px;white-space:nowrap" class="ft28">&#160;</p>
-<p style="position:absolute;top:196px;left:18px;white-space:nowrap" class="ft28">&#160;</p>
-<p style="position:absolute;top:95px;left:720px;white-space:nowrap" class="ft210"><b>COVID-19&#160;</b></p>
-<p style="position:absolute;top:35px;left:177px;white-space:nowrap" class="ft29"><b>REGIONAL DE&#160;ASEGURAMIENTO EN SALUD&#160;</b></p>
-<p style="position:absolute;top:66px;left:245px;white-space:nowrap" class="ft29"><b>No 6 TODOS JUNTOS CONTRA&#160;EL</b></p>
-<p style="position:absolute;top:73px;left:689px;white-space:nowrap" class="ft20">&#160;</p>
-<p style="position:absolute;top:90px;left:11px;white-space:nowrap" class="ft26"><b>&#160;&#160;&#160;&#160;</b></p>
-<p style="position:absolute;top:92px;left:28px;white-space:nowrap" class="ft211"><b>POLICÍA&#160;NACIONAL&#160;</b></p>
-<p style="position:absolute;top:114px;left:11px;white-space:nowrap" class="ft216"><b>DIRECCIÓN&#160;DE&#160;SANIDAD&#160;<br/>&#160;&#160;</b></p>
-<p style="position:absolute;top:158px;left:113px;white-space:nowrap" class="ft20">&#160;</p>
-<p style="position:absolute;top:196px;left:113px;white-space:nowrap" class="ft20">&#160;</p>
-<p style="position:absolute;top:1152px;left:836px;white-space:nowrap" class="ft212"><b>2-2&#160;</b></p>
-</div>
-</body>
-</html>
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
-<head>
-<title></title>
+    <div id="main">
+        <nav id="controls">
+            <div id="controls-left">
+                <button id="btnSideToggle" data-lang-title="control.sidebar" title="Sidebar" class="btn"><i class="fa fa-th fa-lg" aria-hidden="true"></i></button>
+                <button id="btnThemeToggle" data-lang-title="control.theme-toggle" title="Theme Toggle" class="btn"><i class="fa fa-lightbulb-o fa-lg" aria-hidden="true"></i></button>
+            </div>
 
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
- <br/>
-<style type="text/css">
-<!--
-	p {margin: 0; padding: 0;}	.ft30{font-size:14px;font-family:Times;color:#000000;}
-	.ft31{font-size:14px;font-family:Times;color:#1f487c;}
-	.ft32{font-size:25px;font-family:Times;color:#ffffff;}
-	.ft33{font-size:16px;font-family:Times;color:#ffffff;}
-	.ft34{font-size:16px;font-family:Times;color:#ffffff;}
-	.ft35{font-size:14px;font-family:Times;color:#ffffff;}
-	.ft36{font-size:32px;font-family:Times;color:#ffffff;}
-	.ft37{font-size:34px;font-family:Times;color:#ffffff;}
-	.ft38{font-size:14px;font-family:Times;color:#ffffff;}
-	.ft39{font-size:22px;font-family:Times;color:#ffffff;}
-	.ft310{font-size:14px;line-height:20px;font-family:Times;color:#000000;}
-	.ft311{font-size:14px;line-height:21px;font-family:Times;color:#000000;}
-	.ft312{font-size:25px;line-height:30px;font-family:Times;color:#ffffff;}
--->
-</style>
-</head>
-<body bgcolor="#A0A0A0" vlink="blue" link="blue">
-<div id="page3-div" style="position:relative;width:918px;height:1188px;">
-<img width="918" height="1188" src="target003.png" alt="background image"/>
-<p style="position:absolute;top:56px;left:128px;white-space:nowrap" class="ft310">&#160;<br/>&#160;</p>
-<p style="position:absolute;top:109px;left:128px;white-space:nowrap" class="ft31"><b>ACEDER&#160;A&#160;UNA&#160;CITA&#160;PRIORITARIA:&#160;</b></p>
-<p style="position:absolute;top:147px;left:128px;white-space:nowrap" class="ft311">Debe&#160;&#160;comunicarse&#160;&#160;al&#160;&#160;número&#160;&#160;telefónico&#160;&#160;4487009,&#160;&#160;(call&#160;&#160;center),&#160;&#160;donde&#160;&#160;un&#160;&#160;médico&#160;&#160;en&#160;<br/>compañía&#160;de&#160;los&#160;operadores&#160;del&#160;call&#160;center,&#160;determinan&#160;el&#160;nivel&#160;de&#160;prioridad&#160;y&#160;realizan&#160;la&#160;<br/>asignación&#160;de&#160;la&#160;cita&#160;prioritaria.&#160;</p>
-<p style="position:absolute;top:227px;left:128px;white-space:nowrap" class="ft31"><b>RECLAMAR&#160;MEDICAMENTOS:&#160;</b></p>
-<p style="position:absolute;top:264px;left:128px;white-space:nowrap" class="ft311">Los&#160;servicios&#160;de&#160;farmacia&#160;hospitalaria&#160;y&#160;las&#160;farmacias&#160;de&#160;los&#160;Establecimientos&#160;de&#160;Sanidad&#160;<br/>Primarios,&#160;vienen&#160;funcionando&#160;con&#160;normalidad,&#160;y&#160;pueden&#160;acercarse&#160;a&#160;los&#160;mismos&#160;para&#160;la&#160;<br/>entrega&#160;de&#160;los&#160;medicamentos&#160;formulados,&#160;se&#160;solicita&#160;que&#160;aquellas&#160;poblaciones&#160;especiales&#160;<br/>de&#160;riesgo&#160;(mayores&#160;de&#160;70&#160;años,&#160;inmunosuprimidos&#160;o&#160;con&#160;enfermedades&#160;huérfanas)&#160;envíen&#160;<br/>un&#160;familiar&#160;o&#160;acudiente&#160;a&#160;reclamar&#160;dichos&#160;medicamentos,&#160;para&#160;esto&#160;deben&#160;comunicarse&#160;a&#160;<br/>la&#160;&#160;línea&#160;&#160;telefónica&#160;&#160;nro.&#160;&#160;35066656774,&#160;&#160;donde&#160;&#160;podrán&#160;&#160;programarse&#160;&#160;de&#160;&#160;acuerdo&#160;&#160;a&#160;<br/>cumplimiento&#160;de&#160;criterios&#160;médicos.&#160;</p>
-<p style="position:absolute;top:431px;left:128px;white-space:nowrap" class="ft31"><b>ACCEDER&#160;A&#160;PROGRAMAS&#160;ESPECIALES:&#160;</b></p>
-<p style="position:absolute;top:469px;left:128px;white-space:nowrap" class="ft311">Con&#160;&#160;los&#160;&#160;pacientes&#160;&#160;de&#160;&#160;programas&#160;&#160;especiales&#160;&#160;(pacientes&#160;&#160;en&#160;&#160;programa&#160;&#160;de&#160;&#160;riesgo&#160;<br/>cardiovascular,&#160;</p>
-<p style="position:absolute;top:490px;left:264px;white-space:nowrap" class="ft30">pacientes&#160;</p>
-<p style="position:absolute;top:490px;left:361px;white-space:nowrap" class="ft30">diabéticos,&#160;</p>
-<p style="position:absolute;top:490px;left:466px;white-space:nowrap" class="ft30">hipertensos,&#160;</p>
-<p style="position:absolute;top:490px;left:582px;white-space:nowrap" class="ft30">con&#160;</p>
-<p style="position:absolute;top:490px;left:635px;white-space:nowrap" class="ft30">enfermedad&#160;</p>
-<p style="position:absolute;top:490px;left:749px;white-space:nowrap" class="ft30">renal,&#160;</p>
-<p style="position:absolute;top:512px;left:128px;white-space:nowrap" class="ft311">inmunosuprimidos)&#160;que&#160;presentan&#160;enfermedades&#160;de&#160;riesgo&#160;para&#160;letalidad&#160;el&#160;virus,&#160;se&#160;vienen&#160;<br/>realizando&#160;seguimiento&#160;telefónico&#160;por&#160;parte&#160;de&#160;sus&#160;médicos&#160;tratantes,&#160;los&#160;cuales&#160;realizan&#160;a&#160;<br/>través&#160;de&#160;telemedicina,&#160;el&#160;seguimiento,&#160;realizan&#160;la&#160;formulación&#160;de&#160;medicamentos,&#160;ordenes&#160;<br/>de&#160;&#160;laboratorio,&#160;&#160;y&#160;&#160;demás,&#160;&#160;las&#160;&#160;cuales&#160;&#160;podrán&#160;&#160;ser&#160;&#160;reclamadas&#160;&#160;en&#160;&#160;el&#160;&#160;Establecimiento&#160;&#160;de&#160;<br/>Sanidad&#160;Primario&#160;de&#160;Bello&#160;por&#160;un&#160;acudiente&#160;o&#160;familiar.&#160;</p>
-<p style="position:absolute;top:636px;left:128px;white-space:nowrap" class="ft311">Para&#160;&#160;pacientes&#160;&#160;mayores&#160;&#160;de&#160;&#160;70&#160;&#160;años&#160;&#160;se&#160;&#160;dispuso&#160;&#160;de&#160;&#160;un&#160;&#160;servicio&#160;&#160;médico&#160;&#160;domiciliario&#160;<br/>compuesto&#160;&#160;por&#160;&#160;médico&#160;&#160;general&#160;&#160;y&#160;&#160;enfermero,&#160;&#160;los&#160;&#160;cuales&#160;&#160;realizaran&#160;&#160;visitas&#160;&#160;en&#160;&#160;sus&#160;&#160;casas&#160;<br/>priorizando&#160;las&#160;patologías&#160;y&#160;estado&#160;de&#160;salud&#160;de&#160;los&#160;pacientes,&#160;allá&#160;verificaran&#160;el&#160;estado&#160;de&#160;<br/>salud&#160;y&#160;tomaran&#160;decisiones&#160;si&#160;requiere&#160;formulación&#160;o&#160;prestación&#160;de&#160;otro&#160;servicio&#160;en&#160;salud.&#160;</p>
-<p style="position:absolute;top:738px;left:128px;white-space:nowrap" class="ft31"><b>IR&#160;A&#160;LA&#160;CLINICA&#160;SI&#160;ME&#160;SIENTO&#160;MAL&#160;</b></p>
-<p style="position:absolute;top:776px;left:128px;white-space:nowrap" class="ft311">En&#160;&#160;caso&#160;&#160;de&#160;&#160;presentar&#160;&#160;algún&#160;&#160;tipo&#160;&#160;de&#160;&#160;enfermedad&#160;&#160;o&#160;&#160;malestar&#160;&#160;grave&#160;&#160;debe&#160;&#160;recordar&#160;&#160;que&#160;&#160;el&#160;<br/>servicio&#160;de&#160;urgencias&#160;de&#160;la&#160;clínica&#160;continua&#160;funcionando&#160;de&#160;forma&#160;&#160;continúa&#160;las&#160;24&#160;horas,&#160;<br/>para&#160;atender&#160;cualquier&#160;patología&#160;urgente&#160;o&#160;prioritaria&#160;que&#160;presente.&#160;</p>
-<p style="position:absolute;top:856px;left:128px;white-space:nowrap" class="ft31"><b>ACCEDER&#160;AL&#160;PROGRAMA&#160;DE&#160;ANTICOAGULADOS&#160;</b></p>
-<p style="position:absolute;top:893px;left:128px;white-space:nowrap" class="ft311">Para&#160;pacientes&#160;anticoagulados&#160;se&#160;vienen&#160;llamando&#160;telefónicamente&#160;por&#160;su&#160;médico&#160;tratante&#160;<br/>para&#160;seguimiento&#160;gestión&#160;clínica&#160;y&#160;adicional&#160;en&#160;caso&#160;de&#160;requerir&#160;la&#160;atención&#160;prioritaria&#160;se&#160;&#160;</p>
-<p style="position:absolute;top:951px;left:128px;white-space:nowrap" class="ft311">Dispuso&#160;de&#160;un&#160;servicio&#160;médico&#160;domiciliario&#160;compuesto&#160;por&#160;médico&#160;general&#160;y&#160;enfermero,&#160;los&#160;<br/>cuales&#160;realizaran&#160;visitas&#160;en&#160;sus&#160;casas.&#160;&#160;</p>
-<p style="position:absolute;top:1010px;left:128px;white-space:nowrap" class="ft30">&#160;</p>
-<p style="position:absolute;top:1047px;left:128px;white-space:nowrap" class="ft30">&#160;</p>
-<p style="position:absolute;top:19px;left:460px;white-space:nowrap" class="ft312"><b>&#160;<br/>&#160;&#160;</b></p>
-<p style="position:absolute;top:74px;left:18px;white-space:nowrap" class="ft33"><b>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;</b>&#160;</p>
-<p style="position:absolute;top:100px;left:18px;white-space:nowrap" class="ft35">&#160;</p>
-<p style="position:absolute;top:139px;left:18px;white-space:nowrap" class="ft34">&#160;</p>
-<p style="position:absolute;top:159px;left:460px;white-space:nowrap" class="ft35">&#160;</p>
-<p style="position:absolute;top:197px;left:18px;white-space:nowrap" class="ft35">&#160;</p>
-<p style="position:absolute;top:87px;left:710px;white-space:nowrap" class="ft36"><b>COVID&#160;-</b></p>
-<p style="position:absolute;top:86px;left:840px;white-space:nowrap" class="ft37"><b>&#160;19&#160;</b></p>
-<p style="position:absolute;top:32px;left:180px;white-space:nowrap" class="ft32"><b>REGIONAL DE&#160;ASEGURAMIENTO EN SALUD&#160;</b></p>
-<p style="position:absolute;top:63px;left:248px;white-space:nowrap" class="ft32"><b>No 6 TODOS JUNTOS CONTRA&#160;EL</b></p>
-<p style="position:absolute;top:70px;left:693px;white-space:nowrap" class="ft30">&#160;</p>
-<p style="position:absolute;top:92px;left:14px;white-space:nowrap" class="ft33"><b>&#160;&#160;&#160;&#160;</b></p>
-<p style="position:absolute;top:93px;left:31px;white-space:nowrap" class="ft38"><b>POLICÍA&#160;NACIONAL&#160;</b></p>
-<p style="position:absolute;top:116px;left:14px;white-space:nowrap" class="ft38"><b>DIRECCIÓN&#160;DE&#160;SANIDAD&#160;</b></p>
-<p style="position:absolute;top:160px;left:116px;white-space:nowrap" class="ft30">&#160;</p>
-<p style="position:absolute;top:198px;left:116px;white-space:nowrap" class="ft30">&#160;</p>
-<p style="position:absolute;top:1152px;left:216px;white-space:nowrap" class="ft33"><b>&#160; &#160; &#160; &#160;#YOMEQUEDOENCASAUNCOMPROMISOPORTODOS</b>&#160;</p>
-<p style="position:absolute;top:1178px;left:457px;white-space:nowrap" class="ft35">&#160;</p>
-<p style="position:absolute;top:1155px;left:831px;white-space:nowrap" class="ft39"><b>3-3&#160;</b></p>
-</div>
-</body>
-</html>
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
-<head>
-<title></title>
+            <div id="controls-center">
+                <button id="btnPrev" data-lang-title="control.prev" title="Previous Page" class="btn"><i class="fa fa-caret-left fa-2x" aria-hidden="true"></i></button>
+                <select id="goBtn">
 
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
- <br/>
-<style type="text/css">
-<!--
-	p {margin: 0; padding: 0;}	.ft40{font-size:14px;font-family:Times;color:#000000;}
-	.ft41{font-size:14px;font-family:Times;color:#000000;}
-	.ft42{font-size:14px;font-family:Times;color:#1f487c;}
-	.ft43{font-size:14px;font-family:Symbol;color:#000000;}
-	.ft44{font-size:25px;font-family:Times;color:#ffffff;}
-	.ft45{font-size:16px;font-family:Times;color:#ffffff;}
-	.ft46{font-size:16px;font-family:Times;color:#ffffff;}
-	.ft47{font-size:14px;font-family:Times;color:#ffffff;}
-	.ft48{font-size:34px;font-family:Times;color:#ffffff;}
-	.ft49{font-size:14px;font-family:Times;color:#ffffff;}
-	.ft410{font-size:22px;font-family:Times;color:#ffffff;}
-	.ft411{font-size:14px;line-height:20px;font-family:Times;color:#000000;}
-	.ft412{font-size:14px;line-height:21px;font-family:Times;color:#000000;}
-	.ft413{font-size:25px;line-height:30px;font-family:Times;color:#ffffff;}
--->
-</style>
-</head>
-<body bgcolor="#A0A0A0" vlink="blue" link="blue">
-<div id="page4-div" style="position:relative;width:918px;height:1188px;">
-<img width="918" height="1188" src="target004.png" alt="background image"/>
-<p style="position:absolute;top:56px;left:128px;white-space:nowrap" class="ft411">&#160;<br/>&#160;</p>
-<p style="position:absolute;top:110px;left:128px;white-space:nowrap" class="ft40">&#160;</p>
-<p style="position:absolute;top:146px;left:128px;white-space:nowrap" class="ft41"><b>&#160;</b></p>
-<p style="position:absolute;top:183px;left:128px;white-space:nowrap" class="ft42"><b>ACCEDER&#160;A&#160;EXÁMENES&#160;DE&#160;LABORATORIO&#160;</b></p>
-<p style="position:absolute;top:220px;left:128px;white-space:nowrap" class="ft40">Para&#160;estos&#160;casos&#160;se&#160;dispuso&#160;de&#160;la&#160;línea&#160;telefónica&#160;3396646,&#160;en&#160;la&#160;cual&#160;se&#160;realizará&#160;&#160;</p>
-<p style="position:absolute;top:257px;left:128px;white-space:nowrap" class="ft412">Programación&#160;de&#160;la&#160;cita&#160;para&#160;la&#160;toma&#160;de&#160;laboratorios&#160;esto&#160;con&#160;el&#160;fin&#160;de&#160;evitar&#160;aglomeraciones&#160;<br/>y&#160;facilitar&#160;la&#160;práctica&#160;de&#160;estos&#160;exámenes.&#160;</p>
-<p style="position:absolute;top:316px;left:128px;white-space:nowrap" class="ft42"><b>ACCEDER&#160;A&#160;APOYO&#160;EN&#160;SALUD&#160;MENTAL&#160;</b></p>
-<p style="position:absolute;top:352px;left:128px;white-space:nowrap" class="ft412">Para&#160;&#160;la&#160;&#160;atención&#160;&#160;de&#160;&#160;pacientes&#160;&#160;que&#160;&#160;requieran&#160;&#160;apoyo&#160;&#160;emocional&#160;&#160;y&#160;&#160;contención&#160;&#160;durante&#160;&#160;la&#160;<br/>cuarentena&#160;y&#160;en&#160;el&#160;marco&#160;de&#160;la&#160;pandemia&#160;se&#160;estableció&#160;24&#160;horas&#160;al&#160;día&#160;la&#160;línea&#160;de&#160;&#160;apoyo&#160;<br/>emocional&#160;350&#160;585&#160;5774,&#160;con&#160;el&#160;fin&#160;de&#160;prestar&#160;primeros&#160;auxilios&#160;psicológicos&#160;y&#160;contención&#160;<br/>emocional&#160;a&#160;los&#160;pacientes&#160;durante&#160;la&#160;contingencia.&#160;</p>
-<p style="position:absolute;top:454px;left:128px;white-space:nowrap" class="ft42"><b>ACCEDER&#160;A&#160;LA&#160;LINEA&#160;DE&#160;ATENCIÓN&#160;COVID19&#160;</b></p>
-<p style="position:absolute;top:492px;left:128px;white-space:nowrap" class="ft412">Para&#160;&#160;cualquier&#160;&#160;inquietud&#160;&#160;relacionada&#160;&#160;con&#160;&#160;la&#160;&#160;pandemia&#160;&#160;por&#160;&#160;COVID&#160;&#160;19&#160;&#160;y&#160;&#160;la&#160;&#160;atención&#160;&#160;de&#160;<br/>pacientes&#160;con&#160;síntomas&#160;sugestivos,&#160;se&#160;dispusieron&#160;de&#160;las&#160;líneas&#160;350&#160;585&#160;6010&#160;y&#160;350&#160;585&#160;<br/>6063,&#160;&#160;las&#160;&#160;cuales&#160;&#160;son&#160;&#160;atendidas&#160;&#160;por&#160;&#160;personal&#160;&#160;asistencial&#160;&#160;(médicos&#160;&#160;y&#160;&#160;enfermeras),&#160;&#160;las&#160;&#160;24&#160;<br/>horas&#160;del&#160;día,&#160;garantizando&#160;con&#160;esto&#160;que&#160;las&#160;preguntas&#160;y&#160;la&#160;atención&#160;inicial&#160;sea&#160;resuelta&#160;sin&#160;<br/>necesidad&#160;de&#160;desplazarse&#160;hasta&#160;los&#160;Establecimientos&#160;de&#160;sanidad&#160;policial.&#160;</p>
-<p style="position:absolute;top:616px;left:128px;white-space:nowrap" class="ft42"><b>ACTIVIDADES&#160;CON&#160;NUESTROS&#160;FUNCIONARIOS&#160;</b></p>
-<p style="position:absolute;top:649px;left:155px;white-space:nowrap" class="ft43"></p>
-<p style="position:absolute;top:654px;left:162px;white-space:nowrap" class="ft40">&#160;&#160;Con&#160;&#160;el&#160;&#160;objetivo&#160;&#160;de&#160;&#160;minimizar&#160;&#160;el&#160;&#160;riesgo&#160;&#160;de&#160;&#160;exposición&#160;&#160;de&#160;&#160;nuestros&#160;&#160;funcionarios&#160;</p>
-<p style="position:absolute;top:676px;left:182px;white-space:nowrap" class="ft412">asistenciales,&#160;&#160;se&#160;&#160;ha&#160;&#160;adquirido&#160;&#160;elementos&#160;&#160;de&#160;&#160;protección&#160;&#160;personal&#160;&#160;como&#160;&#160;trajes&#160;&#160;de&#160;<br/>bioseguridad,&#160;&#160;uniformes&#160;&#160;de&#160;mayo,&#160;&#160;es&#160;de&#160;&#160;anotar&#160;&#160;que&#160;&#160;se&#160;&#160;implementó&#160;&#160;un&#160;&#160;equipo&#160;&#160;de&#160;<br/>Elementos&#160;&#160;de&#160;&#160;Protección&#160;&#160;Personal,&#160;&#160;para&#160;&#160;garantizar,&#160;&#160;optimizar&#160;&#160;y&#160;&#160;asegurar,&#160;&#160;el&#160;<br/>adecuado&#160;uso&#160;de&#160;estos&#160;elementos.&#160;<br/>&#160;</p>
-<p style="position:absolute;top:781px;left:155px;white-space:nowrap" class="ft43"></p>
-<p style="position:absolute;top:786px;left:162px;white-space:nowrap" class="ft40">&#160;&#160;Así&#160;mismo,&#160;con&#160;el&#160;apoyo&#160;de&#160;la&#160;Dirección&#160;de&#160;Investigación&#160;Criminal&#160;e&#160;INTERPOL,&#160;se&#160;</p>
-<p style="position:absolute;top:808px;left:182px;white-space:nowrap" class="ft412">recepcionaron&#160;bolsas&#160;para&#160;cadáveres&#160;adecuadas&#160;para&#160;el&#160;manejo&#160;bioseguro&#160;de&#160;los&#160;<br/>mismos.&#160;</p>
-<p style="position:absolute;top:851px;left:128px;white-space:nowrap" class="ft40">&#160;</p>
-<p style="position:absolute;top:867px;left:155px;white-space:nowrap" class="ft43"></p>
-<p style="position:absolute;top:872px;left:162px;white-space:nowrap" class="ft40">&#160;&#160;Acogiéndonos&#160;&#160;a&#160;&#160;las&#160;&#160;políticas&#160;&#160;gubernamentales,&#160;&#160;la&#160;&#160;Unida&#160;&#160;Prestadora&#160;&#160;de&#160;&#160;Salud&#160;&#160;de&#160;</p>
-<p style="position:absolute;top:893px;left:182px;white-space:nowrap" class="ft412">Antioquia,&#160;implementó&#160;la&#160;modalidad&#160;de&#160;trabajo&#160;en&#160;casa&#160;para&#160;personal&#160;uniformado&#160;y&#160;<br/>no&#160;&#160;uniformado,&#160;&#160;dando&#160;&#160;prioridad&#160;&#160;a&#160;&#160;&#160;&#160;mujeres&#160;&#160;gestantes&#160;&#160;y&#160;&#160;funcionarios&#160;&#160;con&#160;<br/>enfermedades&#160;de&#160;riesgo.&#160;</p>
-<p style="position:absolute;top:959px;left:128px;white-space:nowrap" class="ft40">&#160;</p>
-<p style="position:absolute;top:977px;left:155px;white-space:nowrap" class="ft43"></p>
-<p style="position:absolute;top:982px;left:162px;white-space:nowrap" class="ft40">&#160;&#160;Con&#160;el&#160;fin&#160;de&#160;facilitar&#160;el&#160;desplazamiento&#160;del&#160;personal&#160;que&#160;labora&#160;en&#160;&#160;la&#160;Clínica,&#160;se&#160;</p>
-<p style="position:absolute;top:1003px;left:182px;white-space:nowrap" class="ft412">dispuso&#160;de&#160;una&#160;ruta&#160;de&#160;transporte&#160;para&#160;dejarlos,&#160;en&#160;Estación&#160;del&#160;metro&#160;cercana&#160;en&#160;<br/>Horario&#160;nocturno.&#160;<br/>&#160;</p>
-<p style="position:absolute;top:22px;left:458px;white-space:nowrap" class="ft413"><b>&#160;<br/>&#160;&#160;</b></p>
-<p style="position:absolute;top:77px;left:17px;white-space:nowrap" class="ft45"><b>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;</b>&#160;</p>
-<p style="position:absolute;top:103px;left:17px;white-space:nowrap" class="ft47">&#160;</p>
-<p style="position:absolute;top:142px;left:17px;white-space:nowrap" class="ft46">&#160;</p>
-<p style="position:absolute;top:162px;left:458px;white-space:nowrap" class="ft47">&#160;</p>
-<p style="position:absolute;top:200px;left:17px;white-space:nowrap" class="ft47">&#160;</p>
-<p style="position:absolute;top:1151px;left:224px;white-space:nowrap" class="ft45"><b>&#160;&#160;#YOMEQUEDOENCASAUNCOMPROMISODETODOS</b>&#160;</p>
-<p style="position:absolute;top:1176px;left:446px;white-space:nowrap" class="ft47">&#160;</p>
-<p style="position:absolute;top:89px;left:709px;white-space:nowrap" class="ft48"><b>COVID&#160;-&#160;19&#160;</b></p>
-<p style="position:absolute;top:38px;left:179px;white-space:nowrap" class="ft44"><b>REGIONAL DE&#160;ASEGURAMIENTO EN SALUD&#160;</b></p>
-<p style="position:absolute;top:69px;left:247px;white-space:nowrap" class="ft44"><b>No 6 TODOS JUNTOS CONTRA&#160;EL</b></p>
-<p style="position:absolute;top:76px;left:691px;white-space:nowrap" class="ft40">&#160;</p>
-<p style="position:absolute;top:91px;left:11px;white-space:nowrap" class="ft45"><b>&#160;&#160;&#160;&#160;</b></p>
-<p style="position:absolute;top:93px;left:28px;white-space:nowrap" class="ft49"><b>POLICÍA&#160;NACIONAL&#160;</b></p>
-<p style="position:absolute;top:115px;left:11px;white-space:nowrap" class="ft49"><b>DIRECCIÓN&#160;DE&#160;SANIDAD&#160;</b></p>
-<p style="position:absolute;top:137px;left:11px;white-space:nowrap" class="ft40">&#160;</p>
-<p style="position:absolute;top:157px;left:113px;white-space:nowrap" class="ft40">&#160;</p>
-<p style="position:absolute;top:1153px;left:834px;white-space:nowrap" class="ft410">4-4&#160;</p>
-</div>
-</body>
-</html>
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
-<head>
-<title></title>
+                </select>
+                <span id="pgCount"></span>
+                <button id="btnNext" data-lang-title="control.next" title="Next Page" class="btn"><i class="fa fa-caret-right fa-2x" aria-hidden="true"></i></button>
 
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
- <br/>
-<style type="text/css">
-<!--
-	p {margin: 0; padding: 0;}	.ft50{font-size:14px;font-family:Times;color:#000000;}
-	.ft51{font-size:13px;font-family:Times;color:#000000;}
-	.ft52{font-size:13px;font-family:Symbol;color:#000000;}
-	.ft53{font-size:19px;font-family:Times;color:#001f5f;}
-	.ft54{font-size:19px;font-family:Times;color:#001f5f;}
-	.ft55{font-size:19px;font-family:Times;color:#006fc0;}
-	.ft56{font-size:16px;font-family:Times;color:#000000;}
-	.ft57{font-size:16px;font-family:Times;color:#000000;}
-	.ft58{font-size:16px;font-family:Times;color:#ffffff;}
-	.ft59{font-size:17px;font-family:Times;color:#ffffff;}
-	.ft510{font-size:14px;font-family:Times;color:#ffffff;}
-	.ft511{font-size:25px;font-family:Times;color:#ffffff;}
-	.ft512{font-size:16px;font-family:Times;color:#ffffff;}
-	.ft513{font-size:32px;font-family:Times;color:#ffffff;}
-	.ft514{font-size:34px;font-family:Times;color:#ffffff;}
-	.ft515{font-size:14px;font-family:Times;color:#ffffff;}
-	.ft516{font-size:25px;font-family:Times;color:#17365d;}
-	.ft517{font-size:31px;font-family:Times;color:#ffffff;}
-	.ft518{font-size:22px;font-family:Times;color:#ffffff;}
-	.ft519{font-size:14px;line-height:20px;font-family:Times;color:#000000;}
-	.ft520{font-size:16px;line-height:23px;font-family:Times;color:#000000;}
-	.ft521{font-size:16px;line-height:24px;font-family:Times;color:#000000;}
-	.ft522{font-size:25px;line-height:30px;font-family:Times;color:#ffffff;}
--->
-</style>
-</head>
-<body bgcolor="#A0A0A0" vlink="blue" link="blue">
-<div id="page5-div" style="position:relative;width:918px;height:1188px;">
-<img width="918" height="1188" src="target005.png" alt="background image"/>
-<p style="position:absolute;top:56px;left:128px;white-space:nowrap" class="ft519">&#160;<br/>&#160;</p>
-<p style="position:absolute;top:109px;left:182px;white-space:nowrap" class="ft51">&#160;</p>
-<p style="position:absolute;top:130px;left:182px;white-space:nowrap" class="ft50">&#160;</p>
-<p style="position:absolute;top:161px;left:155px;white-space:nowrap" class="ft52"></p>
-<p style="position:absolute;top:166px;left:161px;white-space:nowrap" class="ft51">&#160;</p>
-<p style="position:absolute;top:165px;left:182px;white-space:nowrap" class="ft50">El&#160;grupo&#160;Seguridad&#160;y&#160;Salud&#160;en&#160;el&#160;Trabajo&#160;en&#160;conjunto&#160;con&#160;Salud&#160;Mental&#160;inició&#160;un&#160;</p>
-<p style="position:absolute;top:165px;left:775px;white-space:nowrap" class="ft51">&#160;</p>
-<p style="position:absolute;top:183px;left:155px;white-space:nowrap" class="ft52"></p>
-<p style="position:absolute;top:188px;left:161px;white-space:nowrap" class="ft51">&#160;</p>
-<p style="position:absolute;top:186px;left:182px;white-space:nowrap" class="ft50">plan&#160;de&#160;intervención&#160;para&#160;el&#160;manejo&#160;del&#160;estrés&#160;laboral&#160;por&#160;contingencia&#160;COVID&#160;19.</p>
-<p style="position:absolute;top:187px;left:784px;white-space:nowrap" class="ft51">&#160;</p>
-<p style="position:absolute;top:207px;left:182px;white-space:nowrap" class="ft51">&#160;</p>
-<p style="position:absolute;top:241px;left:330px;white-space:nowrap" class="ft53"><b>Cita&#160;con&#160;su</b>&#160;</p>
-<p style="position:absolute;top:241px;left:449px;white-space:nowrap" class="ft55"><b>Autocuidado&#160;</b></p>
-<p style="position:absolute;top:265px;left:178px;white-space:nowrap" class="ft53"><b>Recomendaciones&#160;de&#160;Distanciamiento&#160;Social&#160;e&#160;Higiene&#160;</b></p>
-<p style="position:absolute;top:289px;left:453px;white-space:nowrap" class="ft56">&#160;</p>
-<p style="position:absolute;top:313px;left:159px;white-space:nowrap" class="ft56">&#160;&#160;No&#160;olvides&#160;&#160;mantener&#160;siempre&#160;&#160;tu&#160;hogar&#160;y&#160;tu&#160;lugar&#160;de&#160;trabajo&#160;limpios.&#160;&#160;Así&#160;nos&#160;</p>
-<p style="position:absolute;top:336px;left:171px;white-space:nowrap" class="ft56">cuidamos&#160;todos.&#160;</p>
-<p style="position:absolute;top:360px;left:159px;white-space:nowrap" class="ft56">&#160;&#160;Al&#160;momento&#160;de&#160;estornudar&#160;o&#160;toser&#160;cubramos&#160;muy&#160;bien&#160;nuestra&#160;nariz&#160;con&#160;un&#160;</p>
-<p style="position:absolute;top:384px;left:171px;white-space:nowrap" class="ft56">pañuelo.&#160;Es&#160;importante&#160;luego&#160;botar&#160;a&#160;la&#160;basura.&#160;</p>
-<p style="position:absolute;top:408px;left:159px;white-space:nowrap" class="ft56">&#160;&#160;Al&#160;estornudar&#160;o&#160;toser,&#160;cubre&#160;tu&#160;cara&#160;con&#160;la&#160;parte&#160;interna&#160;del&#160;codo.&#160;No&#160;uses&#160;tus&#160;</p>
-<p style="position:absolute;top:431px;left:171px;white-space:nowrap" class="ft56">manos.&#160;&#160;</p>
-<p style="position:absolute;top:455px;left:159px;white-space:nowrap" class="ft56">&#160;&#160;No&#160;&#160;olvidemos&#160;&#160;lavarnos&#160;&#160;siempre&#160;&#160;las&#160;&#160;manos&#160;&#160;con&#160;&#160;agua&#160;&#160;y&#160;&#160;jabón&#160;&#160;al&#160;&#160;terminar&#160;&#160;de&#160;</p>
-<p style="position:absolute;top:479px;left:171px;white-space:nowrap" class="ft520">realizar&#160;&#160;alguna&#160;&#160;actividad.&#160;&#160;El&#160;&#160;lavado&#160;&#160;de&#160;&#160;manos&#160;&#160;es&#160;&#160;la&#160;&#160;mejor&#160;&#160;herramienta&#160;&#160;para&#160;<br/>prevenir&#160;el&#160;contagio&#160;del&#160;COVID&#160;</p>
-<p style="position:absolute;top:500px;left:424px;white-space:nowrap" class="ft56">–&#160;19.&#160;</p>
-<p style="position:absolute;top:527px;left:159px;white-space:nowrap" class="ft520">&#160;&#160;Si&#160;tienes&#160;gripa.&#160;Usa&#160;siempre&#160;tapabocas.&#160;Cuidémonos&#160;entre&#160;todos.&#160;<br/>&#160;&#160;Recuerda&#160;que&#160;las&#160;mascotas&#160;NO&#160;transmiten&#160;el&#160;<b>COVID&#160;</b></p>
-<p style="position:absolute;top:547px;left:597px;white-space:nowrap" class="ft57"><b>–&#160;19</b>.&#160;No&#160;las&#160;abandones.&#160;</p>
-<p style="position:absolute;top:574px;left:159px;white-space:nowrap" class="ft56">&#160;&#160;Evita&#160;las&#160;reuniones&#160;familiares&#160;y&#160;con&#160;amigos&#160;en&#160;sitios&#160;cerrados.&#160;Evita&#160;los&#160;lugares&#160;</p>
-<p style="position:absolute;top:598px;left:171px;white-space:nowrap" class="ft56">donde&#160;haya&#160;aglomeración&#160;de&#160;personas.&#160;</p>
-<p style="position:absolute;top:622px;left:144px;white-space:nowrap" class="ft520">&#160;&#160;<br/>&#160;<br/>&#160;<br/>&#160;<br/>&#160;</p>
-<p style="position:absolute;top:1100px;left:458px;white-space:nowrap" class="ft58"><b>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;</b></p>
-<p style="position:absolute;top:1105px;left:539px;white-space:nowrap" class="ft59">&#160;</p>
-<p style="position:absolute;top:1126px;left:17px;white-space:nowrap" class="ft510">&#160;</p>
-<p style="position:absolute;top:18px;left:461px;white-space:nowrap" class="ft522"><b>&#160;<br/>&#160;&#160;</b></p>
-<p style="position:absolute;top:73px;left:17px;white-space:nowrap" class="ft58"><b>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;</b>&#160;</p>
-<p style="position:absolute;top:99px;left:17px;white-space:nowrap" class="ft510">&#160;</p>
-<p style="position:absolute;top:137px;left:17px;white-space:nowrap" class="ft512">&#160;</p>
-<p style="position:absolute;top:157px;left:461px;white-space:nowrap" class="ft510">&#160;</p>
-<p style="position:absolute;top:196px;left:17px;white-space:nowrap" class="ft510">&#160;</p>
-<p style="position:absolute;top:88px;left:718px;white-space:nowrap" class="ft513"><b>COVID&#160;-</b></p>
-<p style="position:absolute;top:87px;left:849px;white-space:nowrap" class="ft514"><b>&#160;19&#160;</b></p>
-<p style="position:absolute;top:35px;left:180px;white-space:nowrap" class="ft511"><b>REGIONAL DE&#160;ASEGURAMIENTO EN SALUD&#160;</b></p>
-<p style="position:absolute;top:67px;left:249px;white-space:nowrap" class="ft511"><b>No 6 TODOS JUNTOS CONTRA&#160;EL</b></p>
-<p style="position:absolute;top:74px;left:693px;white-space:nowrap" class="ft50">&#160;</p>
-<p style="position:absolute;top:93px;left:7px;white-space:nowrap" class="ft58"><b>&#160;&#160;&#160;&#160;</b></p>
-<p style="position:absolute;top:94px;left:24px;white-space:nowrap" class="ft515"><b>POLICÍA&#160;NACIONAL&#160;</b></p>
-<p style="position:absolute;top:117px;left:7px;white-space:nowrap" class="ft515"><b>DIRECCIÓN&#160;DE&#160;SANID&#160;</b></p>
-<p style="position:absolute;top:139px;left:7px;white-space:nowrap" class="ft50">&#160;</p>
-<p style="position:absolute;top:159px;left:109px;white-space:nowrap" class="ft50">&#160;</p>
-<p style="position:absolute;top:842px;left:587px;white-space:nowrap" class="ft516"><b>#EmpiezaPorTusManos&#160;</b></p>
-<p style="position:absolute;top:846px;left:83px;white-space:nowrap" class="ft516"><b>#YoMeQuedoEnCasa&#160;</b></p>
-<p style="position:absolute;top:1123px;left:64px;white-space:nowrap" class="ft517"><b>REGIONAL DE&#160;ASEGURAMIENTO&#160;EN&#160;SALUD&#160;No 6&#160;</b></p>
-<p style="position:absolute;top:1047px;left:839px;white-space:nowrap" class="ft518">5-5&#160;</p>
-</div>
+                <button id="btnSelect" data-lang-title="control.select" title="Select" class="btn"><i class="fa fa-i-cursor fa-lg" aria-hidden="true"></i></button>
+                <button id="btnMove" title="Pan" data-lang-title="control.move" class="btn"><i class="fa fa-arrows fa-lg" aria-hidden="true"></i></button>
+
+                <button id="btnZoomOut" data-lang-title="control.zoom-out" title="Zoom Out" class="btn"><i class="fa fa-minus fa-lg" aria-hidden="true"></i></button>
+                <select id="zoomBtn">
+                    <option value="specific">100%</option>
+                    <option data-lang-text="control.actual-size" value="actualsize">Actual Size</option>
+                    <option data-lang-text="control.fit-width" value="fitwidth">Fit Width</option>
+                    <option data-lang-text="control.fit-height" value="fitheight">Fit Height</option>
+                    <option data-lang-text="control.fit-page" value="fitpage">Fit Page</option>
+                    <option data-lang-text="control.auto" value="auto">Automatic</option>
+
+                </select>
+                <button id="btnZoomIn" data-lang-title="control.zoom-in" title="Zoom In" class="btn"><i class="fa fa-plus fa-lg" aria-hidden="true"></i></button>
+            </div>
+            <div id="controls-right">
+                <button id="btnFullScreen" data-lang-title="control.fullscreen" title="Fullscreen" class="btn"><i class="fa fa-arrows-alt fa-lg" aria-hidden="true"></i></button>
+            </div>
+        </nav>
+
+        <div id="idrviewer">
+
+        </div>
+    </div>
+    <script src="config.js" type="text/javascript"></script>
+    <script type="text/javascript">IDRViewer.setup();</script>
 </body>
 </html>
